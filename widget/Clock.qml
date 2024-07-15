@@ -7,5 +7,6 @@ Text {
   width: 129 + 30
   anchors.centerIn: parent
   horizontalAlignment: Text.AlignHCenter
+  font.bold: true
   text: Time.time
 }

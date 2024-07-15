@@ -52,7 +52,7 @@ Scope {
         }
         // -- System Tray
         BarItem {
-          color: "#af404b7c"
+          color: "#ee404b7c"
           radius: 30
           SystemTray {
             window: root
@@ -70,7 +70,7 @@ Scope {
         }
         // -- Clock
         BarItem {
-          color: "#9fc4b2"
+          color: "#f9f9fa"
           radius: 30
           Clock {}
         }
@@ -95,7 +95,7 @@ Scope {
         // Items
         // -- Workspaces
         BarItem {
-          color: "#af404b7c"
+          color: "#91404b7c"
           radius: 30
           HyprlandWorkspaces {
             window: root

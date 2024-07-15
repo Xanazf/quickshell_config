@@ -9,12 +9,16 @@ Rectangle {
   property string windowClass: HyprlandIO.activeWindow.hclass
 
   height: 30
-  width: text.width + 30
+  implicitWidth: text.width + 30
   radius: 15
   Text {
     id: text
     color: "#adbcbc"
+    elide: Text.ElideRight
+    maximumLineCount: 20
     anchors.centerIn: parent
+    width: 250
+    horizontalAlignment: Text.AlignHCenter
     font {
       bold: true
       letterSpacing: 0

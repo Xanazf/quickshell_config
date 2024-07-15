@@ -37,7 +37,35 @@ Singleton {
       }
     }
     return transform;
-
+  }
+  function titleTransform(hclass, title){
+    let newTitle;
+    switch (hclass) {
+      case "kitty": {
+        let VimIndex = title.lastIndexOf("vim")
+        let orVim = VimIndex !== -1
+        newTitle = orVim ? "󰄛  " + title.slice(VimIndex + 3) + "  " :"󰄛  " + title
+        break;
+      }
+      case "discord": {
+        newTitle = "󰙯  " + title.split("- Discord")[0]
+        break;
+      }
+      case "google-chrome": {
+        let YTindex = title.lastIndexOf("YouTube")
+        let GoogleIndex = title.lastIndexOf("Google Chrome")
+        let orYT = YTindex !== -1
+        let icon = orYT ? "   " : "  "
+        let processedTitle = title.slice(0, orYT ? YTindex -2 : GoogleIndex -2)
+        newTitle = icon + processedTitle
+        break
+      }
+      default: {
+        newTitle = title
+        break;
+      }
+    }
+    return newTitle;
   }
 
   function sortWorkspaces(arr){
@@ -66,7 +94,7 @@ Singleton {
         case "activewindow": {
           let window = event.parse(2)
           activeWindow.hclass = window[0];
-          activeWindow.title = window[1];
+          activeWindow.title = titleTransform(window[0], window[1]);
           break;
         }
       }

@@ -22,7 +22,7 @@ Item {
       Rectangle {
         id: toprect;
         required property HyprlandWorkspace modelData;
-        property string workspaceColor: HyprlandIO.activeWorkspace.id == modelData.id ? "#9a9ada" : "#7692d6"
+        property string workspaceColor: HyprlandIO.activeWorkspace.id == modelData.id ? "#273495" : "#273463"
         implicitWidth: 32
         implicitHeight: 28
         color: workspaceColor
@@ -36,7 +36,7 @@ Item {
             console.log(Hyprland.workspaces)
           }
           Text {
-            color: "#273453"
+            color: "#95d3af"
             anchors.centerIn: parent;
             font.pixelSize: 12
             width: text.width
