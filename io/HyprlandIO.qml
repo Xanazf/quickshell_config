@@ -11,6 +11,10 @@ Singleton {
     property int id: 1
     property string name: "1"
   }
+  property QtObject activeWindow: QtObject {
+    property string hclass: " "
+    property string title: " "
+  }
 
   function textTransform(layout){
     let transform;
@@ -51,6 +55,18 @@ Singleton {
         case "activelayout": {
           let layout = event.parse(2)[1]
           currKeyboardLayout = textTransform(layout)
+          break;
+        }
+        case "workspacev2": {
+          let workspace = event.parse(2)
+          activeWorkspace.id = workspace[0];
+          activeWorkspace.name = workspace[1];
+          break;
+        }
+        case "activewindow": {
+          let window = event.parse(2)
+          activeWindow.hclass = window[0];
+          activeWindow.title = window[1];
           break;
         }
       }

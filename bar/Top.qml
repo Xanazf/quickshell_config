@@ -103,6 +103,11 @@ Scope {
         }
 
         // -- Current Window
+        BarItem {
+          color: "transparent"
+          radius: 30
+          HyprlandWindow {}
+        }
       }
     }
   }
