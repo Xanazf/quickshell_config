@@ -94,7 +94,7 @@ Singleton {
         case "activewindow": {
           let window = event.parse(2)
           activeWindow.hclass = window[0];
-          activeWindow.title = titleTransform(window[0], window[1]);
+          activeWindow.title = titleTransform(window[0], window[1]) ?? "";
           break;
         }
       }
