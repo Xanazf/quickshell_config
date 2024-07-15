@@ -7,19 +7,21 @@ import "root:/io"
 
 RowLayout {
   id: root;
-  spacing: 3
+  spacing: 15
   required property QSWindow window;
-  width: 28 * repeater.count + 30;
+  implicitWidth: 40 * repeater.count + 30;
+  implicitHeight: 30;
   Repeater {
     id: repeater;
-    model: Hyprland.sortedWorkspaces
+    model: HyprlandIO.sortedWorkspaces
+    property int count: HyprlandIO.sortedWorkspaces.length
     Rectangle {
       Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
       id: toprect;
       required property HyprlandWorkspace modelData;
-      width: 28
-      height: 30
-      color: "transparent"
+      implicitWidth: 32
+      implicitHeight: 28
+      color: "#7692d6"
       radius: 30
       MouseArea {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -30,7 +32,10 @@ RowLayout {
           console.log(Hyprland.workspaces)
         }
         Text {
+          color: "#273453"
           anchors.centerIn: parent;
+          font.pixelSize: 12
+          width: text.width
           text: modelData.id
         }
       }

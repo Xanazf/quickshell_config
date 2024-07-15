@@ -10,13 +10,12 @@ Rectangle {
   width: 30
   radius: 15
   Text {
-    property string currLayout: Hyprland.currKeyboardLayout;
     color: "#404b7c"
     anchors.centerIn: parent
     font {
       bold: true
       letterSpacing: 0
     }
-    text: Hyprland.currKeyboardLayout
+    text: HyprlandIO.currKeyboardLayout
   }
 }

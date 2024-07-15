@@ -95,7 +95,8 @@ Scope {
         // Items
         // -- Workspaces
         BarItem {
-          color: "transparent"
+          color: "#af404b7c"
+          radius: 30
           HyprlandWorkspaces {
             window: root
           }

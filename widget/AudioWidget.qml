@@ -8,17 +8,22 @@ Rectangle {
   id: root;
   anchors.centerIn: parent
   color: "transparent"
-  width: 75 + 38
+  implicitWidth: 75 + 38
   RowLayout {
     anchors {
       centerIn: parent
     }
-    width: parent.width
+    implicitWidth: parent.width
+    spacing: 1
+
 
     BarItem {
       color: "#404b7c"
       Layout.preferredWidth: textfield.width * 1.8
-      radius: 30
+      topLeftRadius: 30
+      bottomLeftRadius: 30
+      topRightRadius: 6
+      bottomRightRadius: 6
       Text {
         id: textfield
         color: "#95d3af"
@@ -33,9 +38,12 @@ Rectangle {
     }
     BarItem {
       color: "#f9f9fa"
-      radius: 30
-      width: textfield2.width
+      implicitWidth: textfield2.width
       Layout.preferredWidth: textfield2.width * 1.8
+      topLeftRadius: 6
+      bottomLeftRadius: 6
+      topRightRadius: 30
+      bottomRightRadius: 30
       Text {
         id: textfield2
         width: Audio.micVolume < 100 ? 28 : 35

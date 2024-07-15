@@ -6,7 +6,7 @@ import QtQuick
 
 Singleton {
   property string currKeyboardLayout: "US";
-  property string sortedWorkspaces: sortWorkspaces(Hyprland.workspaces.values);
+  property list<HyprlandWorkspace> sortedWorkspaces: sortWorkspaces(Hyprland.workspaces.values);
   property QtObject activeWorkspace: QtObject {
     property int id: 1
     property string name: "1"
@@ -37,7 +37,7 @@ Singleton {
   }
 
   function sortWorkspaces(arr){
-    return [...arr].sort()
+    return [...arr].sort((a, b) => a.id - b.id)
   }
 
   Connections {
