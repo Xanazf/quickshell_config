@@ -80,11 +80,15 @@ Scope {
       RowLayout {
         // Anchor to the center
         anchors {
-          top: parent.top
+          centerIn: parent
         }
 
         // Items
         // -- Mpris
+        BarItem {
+          color: "transparent"
+          MprisWidget {}
+        }
       }
 
       // Left Side

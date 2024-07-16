@@ -28,12 +28,12 @@ Rectangle {
         id: textfield
         color: "#95d3af"
         anchors.centerIn: parent
-        width: Audio.volume < 100 ? 32 : 39
+        width: PipewireIO.volume < 100 ? 32 : 39
         property string volumeLow: "󰕿 "
         property string volumeMid: "󰖀 "
         property string volumeHigh: "󰕾 "
-        property string volumeIcon: Audio.volume < 30 ? volumeLow : Audio.volume < 70 ? volumeMid : volumeHigh
-        text: volumeIcon+Audio.volume 
+        property string volumeIcon: PipewireIO.volume < 30 ? volumeLow : PipewireIO.volume < 70 ? volumeMid : volumeHigh
+        text: volumeIcon+PipewireIO.volume 
       }
     }
     BarItem {
@@ -46,10 +46,10 @@ Rectangle {
       bottomRightRadius: 30
       Text {
         id: textfield2
-        width: Audio.micVolume < 100 ? 28 : 35
+        width: PipewireIO.micVolume < 100 ? 28 : 35
         color: "#404b7c"
         anchors.centerIn: parent
-        text: " " + Audio.micVolume 
+        text: " " + PipewireIO.micVolume 
       }
     }
   }
