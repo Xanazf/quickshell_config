@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 import QtQuick.Layouts
-import "root:/component"
 import "root:/io"
 
 Rectangle {
@@ -17,9 +16,10 @@ Rectangle {
     spacing: 1
 
 
-    BarItem {
+    Rectangle {
       color: "#404b7c"
       Layout.preferredWidth: textfield.width * 1.8
+      height: 30
       topLeftRadius: 30
       bottomLeftRadius: 30
       topRightRadius: 6
@@ -36,10 +36,11 @@ Rectangle {
         text: volumeIcon+PipewireIO.volume 
       }
     }
-    BarItem {
+    Rectangle {
       color: "#f9f9fa"
       implicitWidth: textfield2.width
       Layout.preferredWidth: textfield2.width * 1.8
+      height: 30
       topLeftRadius: 6
       bottomLeftRadius: 6
       topRightRadius: 30

@@ -5,9 +5,19 @@ import "root:/io"
 
 Rectangle {
   id: root;
-  anchors.centerIn: parent
-  property MprisPlayer player: MprisIO.trackedPlayer;
-  property string artist: player.trackAlbumArtist || player.metadata["xesam:artist"]
+  anchors.centerIn: parent;
+
+  // fallback for missing MprisPlayer on startup
+  property QtObject fallbackPlayer: QtObject {
+    property string trackAlbumArtist: ""
+    property string trackArtists: ""
+    property string trackTitle: ""
+    property int playbackState: MprisPlaybackState.Stopped
+  }
+  property QtObject player: MprisIO.trackedPlayer ?? fallbackPlayer;
+
+  // destructuring of the Player object
+  property string artist: player.trackAlbumArtist || player.trackArtists
   property string title: player.trackTitle
   property bool playing: player.playbackState === MprisPlaybackState.Playing
   property string playbackBG: playing ? "#00bbcc" : "#9a273453"

@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import "root:/component"
 import "root:/io"
 
 Rectangle {

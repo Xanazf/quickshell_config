@@ -1,8 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "root:/widget"
-import "root:/component"
+import "./component/"
+import "root:/"
+import "root:/datetimeWidget"
+import "root:/systemtrayWidget"
+import "root:/audioWidget"
+import "root:/systemstatsWidget"
+import "root:/mprisWidget"
+import "root:/hyprWidget"
+import "root:/keyboardWidget"
 
 
 // Screen Factory
@@ -33,7 +40,7 @@ Scope {
       height: 30
 
       // Styling
-      color: "transparent"
+      color: Config.colors.bar
 
       // Right Side
       RowLayout {
@@ -47,7 +54,6 @@ Scope {
         // -- Clipboard
         // -- Language
         BarItem {
-          color: "transparent"
           KeyboardLayout {}
         }
         // -- System Tray
@@ -60,18 +66,14 @@ Scope {
         }
         // -- Audio
         BarItem {
-          color: "transparent"
           AudioWidget {}
         }
         // -- Memory
         BarItem {
-          color: "transparent"
           MemoryWidget {}
         }
         // -- Clock
         BarItem {
-          color: "#f9f9fa"
-          radius: 30
           Clock {}
         }
       }
@@ -86,7 +88,6 @@ Scope {
         // Items
         // -- Mpris
         BarItem {
-          color: "transparent"
           MprisWidget {}
         }
       }
@@ -108,7 +109,6 @@ Scope {
 
         // -- Current Window
         BarItem {
-          color: "transparent"
           radius: 30
           HyprlandWindow {}
         }
