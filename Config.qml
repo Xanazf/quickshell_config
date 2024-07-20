@@ -31,12 +31,19 @@ Singleton {
 
   // universal sizes
   property QtObject sizes: QtObject {
-    property int barHeight: 30;
+    property int barHeight: 28;
     property int barMargin: 6;
   }
 
   property QtObject colors: QtObject {
     property string bar: "transparent";
+    property string mainBG: "#404b7c";
+    property string mainFG: "#95d3af";
+    property string secondaryBG: "#f9f9fa";
+    property string secondaryFG: "#404b7c";
+    property string modularBG: "404b7c";
+    property string modularFG: "95d3af";
+    property string modularFG2: "f9f9fa";
   }
 
 

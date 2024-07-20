@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import "root:/io"
+import "root:/"
 
 Rectangle {
   color: "#9a273453"
@@ -8,7 +9,7 @@ Rectangle {
   property string windowTitle: HyprlandIO.activeWindow.title
   property string windowClass: HyprlandIO.activeWindow.hclass
 
-  height: 30
+  height: Config.sizes.barHeight
   implicitWidth: text.width + 30
   radius: 15
   Text {
@@ -18,7 +19,9 @@ Rectangle {
     maximumLineCount: 20
     anchors.centerIn: parent
     width: 250
+    height: parent.height
     horizontalAlignment: Text.AlignHCenter
+    verticalAlignment: Text.AlignVCenter
     font {
       bold: true
       letterSpacing: 0

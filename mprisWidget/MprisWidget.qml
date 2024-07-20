@@ -24,7 +24,7 @@ Rectangle {
   property string playbackFG: playing ? "#273453" : "#adbcbc"
   color: playbackBG
 
-  height: 30
+  height: 28
   implicitWidth: text.width + 30
   radius: 15
   MouseArea {

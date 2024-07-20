@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import "./component/"
+import "root:/shared/component/"
 import "root:/"
 import "root:/datetimeWidget"
 import "root:/systemtrayWidget"
@@ -10,6 +11,7 @@ import "root:/systemstatsWidget"
 import "root:/mprisWidget"
 import "root:/hyprWidget"
 import "root:/keyboardWidget"
+import "root:/clipboardWidget"
 
 
 // Screen Factory
@@ -42,6 +44,18 @@ Scope {
       // Styling
       color: Config.colors.bar
 
+      // hover border
+      property Item hoveredItem;
+      property bool isHovered: false;
+
+      HoverItem {
+        id: hoverItem;
+        hovered: isHovered;
+        wX: root.contentItem.mapFromItem(hoveredItem, 0, 0).x;
+        wWidth: hoveredItem?.width ?? 0;
+      }
+
+
       // Right Side
       RowLayout {
         // Anchor to the right side
@@ -52,13 +66,34 @@ Scope {
 
         // Items
         // -- Clipboard
+        BarItem {
+          Clipboard {}
+        }
         // -- Language
         BarItem {
-          KeyboardLayout {}
+          id: lang;
+          KeyboardLayout {
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true;
+              propagateComposedEvents: true;
+              onEntered: {
+                root.hoveredItem = lang;
+                root.isHovered = true
+                //console.log(root.hoveredItem)
+              }
+              onExited: {
+                root.isHovered = false
+                //root.hoveredItem = null;
+                //console.log(root.hoveredItem)
+              }
+            }
+          }
         }
         // -- System Tray
         BarItem {
-          color: "#ee404b7c"
+          id: sysTray;
+          color: "#90" + Config.colors.modularBG
           radius: 30
           SystemTray {
             window: root
@@ -66,11 +101,46 @@ Scope {
         }
         // -- Audio
         BarItem {
-          AudioWidget {}
+          id: audio;
+          AudioWidget {
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true;
+              propagateComposedEvents: true;
+              onEntered: {
+                root.hoveredItem = audio;
+                root.isHovered = true
+                //console.log(root.hoveredItem.x)
+              }
+              onExited: {
+                root.isHovered = false
+                //root.hoveredItem = null;
+                //console.log(root.hoveredItem)
+              }
+            }
+          }
         }
         // -- Memory
         BarItem {
-          MemoryWidget {}
+          id: memory;
+          MemoryWidget {
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true;
+              propagateComposedEvents: true;
+              onEntered: {
+                root.hoveredItem = memory;
+                root.isHovered = true
+                //console.log(root.hoveredItem)
+              }
+              onExited: {
+                root.isHovered = false
+                //root.hoveredItem = null;
+                //console.log(root.hoveredItem)
+              }
+            }
+
+          }
         }
         // -- Clock
         BarItem {
@@ -88,7 +158,24 @@ Scope {
         // Items
         // -- Mpris
         BarItem {
-          MprisWidget {}
+          id: mpris;
+          MprisWidget {
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true;
+              propagateComposedEvents: true;
+              onEntered: {
+                root.hoveredItem = mpris;
+                root.isHovered = true
+                //console.log(root.hoveredItem)
+              }
+              onExited: {
+                root.isHovered = false
+                //root.hoveredItem = null;
+                //console.log(root.hoveredItem)
+              }
+            }
+          }
         }
       }
 

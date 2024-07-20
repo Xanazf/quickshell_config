@@ -4,17 +4,19 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import "root:/io"
+import "root:/"
 
 Item {
   id: root
   required property QSWindow window;
   implicitWidth: layout.implicitWidth + 2
-  implicitHeight: 30;
+  implicitHeight: Config.sizes.barHeight + 2;
 
   RowLayout {
     id: layout
     anchors.centerIn: parent;
     spacing: 15
+    implicitHeight: parent.height
     Repeater {
       id: repeater;
       model: HyprlandIO.sortedWorkspaces
@@ -24,7 +26,7 @@ Item {
         required property HyprlandWorkspace modelData;
         property string workspaceColor: HyprlandIO.activeWorkspace.id == modelData.id ? "#273495" : "#273463"
         implicitWidth: 32
-        implicitHeight: 28
+        implicitHeight: Config.sizes.barHeight
         color: workspaceColor
         radius: 30
         MouseArea {
@@ -39,6 +41,7 @@ Item {
             color: "#95d3af"
             anchors.centerIn: parent;
             font.pixelSize: 12
+            font.family: "Hack Nerd Font Mono"
             width: text.width
             text: modelData.id
           }

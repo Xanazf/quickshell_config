@@ -3,8 +3,8 @@ import Quickshell
 import "root:/"
 
 Rectangle {
+  id: root;
   required default property Item item;
-
   color: Config.colors.bar
 
   implicitWidth: item.width

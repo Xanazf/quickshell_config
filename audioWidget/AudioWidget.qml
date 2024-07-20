@@ -8,18 +8,20 @@ Rectangle {
   anchors.centerIn: parent
   color: "transparent"
   implicitWidth: 75 + 38
+  height: 28
   RowLayout {
     anchors {
       centerIn: parent
     }
     implicitWidth: parent.width
+    implicitHeight: parent.height
     spacing: 1
 
 
     Rectangle {
       color: "#404b7c"
       Layout.preferredWidth: textfield.width * 1.8
-      height: 30
+      height: parent.height
       topLeftRadius: 30
       bottomLeftRadius: 30
       topRightRadius: 6
@@ -40,7 +42,7 @@ Rectangle {
       color: "#f9f9fa"
       implicitWidth: textfield2.width
       Layout.preferredWidth: textfield2.width * 1.8
-      height: 30
+      height: parent.height
       topLeftRadius: 6
       bottomLeftRadius: 6
       topRightRadius: 30

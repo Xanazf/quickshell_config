@@ -1,8 +1,7 @@
 //@ pragma UseQApplication
 import QtQuick
 import Quickshell
-import "root:/widget"
-// import "root:/component"
+import "root:/shared/widget"
 import "root:/bar"
 import "root:/"
 
