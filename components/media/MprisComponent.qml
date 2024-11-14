@@ -1,11 +1,13 @@
 import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
+
 import "root:/io"
+import "root:/"
 
 Rectangle {
-  id: root;
-  anchors.centerIn: parent;
+  id: root
+  anchors.centerIn: parent
 
   // fallback for missing MprisPlayer on startup
   property QtObject fallbackPlayer: QtObject {
@@ -14,14 +16,14 @@ Rectangle {
     property string trackTitle: ""
     property int playbackState: MprisPlaybackState.Stopped
   }
-  property QtObject player: MprisIO.trackedPlayer ?? fallbackPlayer;
+  property QtObject player: MprisIO.trackedPlayer ?? fallbackPlayer
 
   // destructuring of the Player object
   property string artist: player.trackAlbumArtist || player.trackArtists
   property string title: player.trackTitle
   property bool playing: player.playbackState === MprisPlaybackState.Playing
-  property string playbackBG: playing ? "#00bbcc" : "#9a273453"
-  property string playbackFG: playing ? "#273453" : "#adbcbc"
+  property string playbackBG: playing ? Config.colors.mainColor4 : "#9a273453"
+  property string playbackFG: playing ? Config.colors.neutral : Config.colors.fontcolor
   color: playbackBG
 
   height: 28
@@ -45,11 +47,11 @@ Rectangle {
       }
       text: root.artist + " | " + root.title
     }
-    onClicked: (mouse) => {
+    onClicked: mouse => {
       if (root.playing) {
-        root.player.pause()
+        root.player.pause();
       } else {
-        root.player.play()
+        root.player.play();
       }
     }
   }

@@ -60,6 +60,15 @@ Singleton {
         newTitle = icon + processedTitle
         break
       }
+      case "firefox": {
+        let YTindex = title.lastIndexOf("YouTube")
+        let GoogleIndex = title.lastIndexOf("Firefox")
+        let orYT = YTindex !== -1
+        let icon = orYT ? "   " : "  "
+        let processedTitle = title.slice(0, orYT ? YTindex -2 : GoogleIndex -2)
+        newTitle = icon + processedTitle
+        break
+      }
       default: {
         newTitle = title
         break;

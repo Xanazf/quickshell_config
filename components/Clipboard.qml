@@ -1,13 +1,14 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
-import "root:/io"
+
 import "root:/"
+import "root:/io"
 
 Rectangle {
-  id: root;
-  anchors.centerIn: parent;
-  color: Config.colors.mainBG
+  id: root
+  anchors.centerIn: parent
+  color: Config.colors.mainColor2
   implicitHeight: 28
   implicitWidth: 42
   radius: 30
@@ -17,11 +18,11 @@ Rectangle {
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    property bool isHovered: false;
-    property string tooltipText: "0";
+    property bool isHovered: false
+    property string tooltipText: "0"
     Text {
       id: text
-      color: Config.colors.mainFG
+      color: Config.colors.fontcolor
       anchors.fill: parent
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
@@ -31,7 +32,7 @@ Rectangle {
       }
       text: "󰨸"
     }
-    onClicked: (mouse) => {
+    onClicked: mouse => {
       if (mouse.button === Qt.LeftButton) {
         ClipboardIO.runninglist = true;
       } else if (mouse.button === Qt.RightButton) {
@@ -40,30 +41,29 @@ Rectangle {
     }
     onEntered: {
       ClipboardIO.runningcount = true;
-      isHovered = true
+      isHovered = true;
     }
     onExited: {
-      isHovered = false
+      isHovered = false;
     }
     ToolTip {
-      id: tooltip;
+      id: tooltip
       delay: 300
-      width: 200;
-      height: 30;
+      width: 200
+      height: 30
       visible: false //mouseArea.isHovered;
       //topMargin: 30
-      y: 100;
-      x: -60;
+      y: 100
+      x: -60
       text: mouseArea.tooltipText
     }
   }
 
   Connections {
     target: ClipboardIO
-    function cliphistcount(count){
-      console.log(count)
-      mouseArea.tooltipText = count
+    function cliphistcount(count) {
+      console.log(count);
+      mouseArea.tooltipText = count;
     }
   }
-
 }

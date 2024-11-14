@@ -1,20 +1,23 @@
 import QtQuick
 import Quickshell
-import "root:/io"
+
 import "root:/"
+import "root:/io"
+import "root:/components/shared"
 
 Rectangle {
-  color: "#9a273453"
+  id: root
+  color: "transparent"
   anchors.centerIn: parent
   property string windowTitle: HyprlandIO.activeWindow.title
   property string windowClass: HyprlandIO.activeWindow.hclass
 
-  height: Config.sizes.barHeight
+  implicitHeight: Config.sizes.barHeight
   implicitWidth: text.width + 30
   radius: 15
   Text {
     id: text
-    color: "#adbcbc"
+    color: Config.colors.fontcolor
     elide: Text.ElideRight
     maximumLineCount: 20
     anchors.centerIn: parent
