@@ -19,7 +19,6 @@ Rectangle {
       blurMax: 32
       blurMultiplier: 1.0
       saturation: 1
-      brightness: -0.5
     }
   }
   opacity: 1 - Config.opacityOffset
@@ -28,14 +27,7 @@ Rectangle {
     id: gradient1
     orientation: Gradient.Horizontal
     property real positionOffset
-    GradientStop {
-      position: -0.4 + gradient1.positionOffset
-      color: Config.colors.mainColor2
-    }
-    GradientStop {
-      position: -0.2 + gradient1.positionOffset
-      color: Config.colors.mainColor3
-    }
+
     GradientStop {
       position: 0.0 + gradient1.positionOffset
       color: Config.colors.mainColor1
@@ -54,11 +46,11 @@ Rectangle {
     }
     GradientStop {
       position: 0.8 + gradient1.positionOffset
-      color: Config.colors.mainColor5
+      color: Config.colors.mainColor6
     }
     GradientStop {
       position: 1.0 + gradient1.positionOffset
-      color: Config.colors.mainColor6
+      color: Config.colors.mainColor4
     }
     GradientStop {
       position: 1.2 + gradient1.positionOffset
@@ -68,17 +60,16 @@ Rectangle {
       position: 1.4 + gradient1.positionOffset
       color: Config.colors.mainColor2
     }
+    GradientStop {
+      position: 1.6 + gradient1.positionOffset
+      color: Config.colors.mainColor1
+    }
     NumberAnimation on positionOffset {
       id: numanim
       loops: Animation.Infinite
-      property bool reverse
-      duration: 60000
+      duration: 30000
       from: -2.0
       to: 1.0
-      onFinished: {
-        numanim.reverse = !numanim.reverse;
-        numanim.start();
-      }
     }
   }
 }

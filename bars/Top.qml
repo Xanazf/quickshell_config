@@ -10,6 +10,9 @@ import "root:/components/datetime"
 import "root:/components/hyprland"
 import "root:/components/media"
 import "root:/components/systemctx"
+import "root:/components/menu"
+import "root:/components/updatecheck"
+import "root:/components/clipboard"
 
 // Screen Factory
 Scope {
@@ -37,45 +40,84 @@ Scope {
         left: 6
       }
       height: Config.sizes.barHeight
+      width: screen.width
 
       // Styling
       color: "transparent"
       BackgroundItem {}
 
+      // Popups
+      ClipboardPopup {
+        window: root
+        parentRect: clipboardItem
+        show: clipboardRoot.showPopup
+        items: clipboardRoot.cliphistdata
+      }
+
+      AppMenuPopup {
+        window: root
+        parentRect: appmenuItem
+        show: appmenuRoot.showPopup
+      }
       // Left Side
       RowLayout {
+        id: leftLayoutRoot
         // Anchor to the left side
         anchors {
           left: parent.left
         }
 
+        spacing: 9
+
         // Items
+        BarItem {
+          DotDecoration {
+            transparent: true
+          }
+        }
         // -- Menu
+        BarItem {
+          id: appmenuItem
+          AppMenu {
+            id: appmenuRoot
+          }
+        }
+        BarItem {
+          DotDecoration {}
+        }
+
         // -- Update
+        BarItem {
+          UpdateComponent {}
+        }
+        BarItem {
+          DotDecoration {}
+        }
         // -- Window
         BarItem {
-          radius: 30
-          HyprlandWindow {}
+          MprisComponent {}
         }
       }
 
       // Center
       RowLayout {
+        id: centerLayoutRoot
         // Anchor to the center
         anchors {
           centerIn: parent
         }
 
-        // Items
-        // -- Mpris
+        // Workspaces
         BarItem {
-          id: mpris
-          MprisComponent {}
+          HyprlandWorkspaces {
+            window: root
+          }
         }
       }
 
       // Right Side
       RowLayout {
+        id: rightLayoutRoot
         // Anchor to the right side
         anchors {
           right: parent.right
@@ -85,82 +127,45 @@ Scope {
         // Items
         // -- Clipboard
         BarItem {
-          Clipboard {}
-        }
-        // -- Language
-        BarItem {
-          id: lang
-          KbLayout {
-            MouseArea {
-              anchors.fill: parent
-              hoverEnabled: true
-              propagateComposedEvents: true
-              onEntered: {
-                root.hoveredItem = lang;
-                root.isHovered = true;
-                //console.log(root.hoveredItem)
-              }
-              onExited: {
-                root.isHovered = false;
-                //root.hoveredItem = null;
-                //console.log(root.hoveredItem)
-              }
-            }
+          id: clipboardItem
+          Clipboard {
+            id: clipboardRoot
           }
         }
         // -- System Tray
         BarItem {
-          id: sysTray
-          radius: 30
-          SysTray {
-            window: root
-          }
+          DotDecoration {}
         }
         // -- Audio
         BarItem {
           id: audio
-          Audio {
-            MouseArea {
-              anchors.fill: parent
-              hoverEnabled: true
-              propagateComposedEvents: true
-              onEntered: {
-                root.hoveredItem = audio;
-                root.isHovered = true;
-                //console.log(root.hoveredItem.x)
-              }
-              onExited: {
-                root.isHovered = false;
-                //root.hoveredItem = null;
-                //console.log(root.hoveredItem)
-              }
-            }
-          }
+          Audio {}
         }
-        // -- Memory
         BarItem {
-          id: memory
-          MemStat {
-            MouseArea {
-              anchors.fill: parent
-              hoverEnabled: true
-              propagateComposedEvents: true
-              onEntered: {
-                root.hoveredItem = memory;
-                root.isHovered = true;
-                //console.log(root.hoveredItem)
-              }
-              onExited: {
-                root.isHovered = false;
-                //root.hoveredItem = null;
-                //console.log(root.hoveredItem)
-              }
-            }
-          }
+          DotDecoration {}
+        }
+        // -- Keyboard
+        BarItem {
+          KbLayout {}
+        }
+        BarItem {
+          DotDecoration {}
         }
         // -- Clock
         BarItem {
           Clock {}
+        }
+        BarItem {
+          DotDecoration {}
+        }
+        // -- System Menu
+        BarItem {
+          SysMenu {}
+        }
+        BarItem {
+          DotDecoration {
+            transparent: true
+          }
         }
       }
     }

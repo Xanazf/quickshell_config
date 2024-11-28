@@ -9,6 +9,7 @@ Item {
   anchors.fill: parent
   width: parent.width
   height: parent.height
+
   layer {
     enabled: true
     effect: OpacityMask {

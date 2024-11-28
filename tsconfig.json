@@ -1,5 +1,7 @@
 {
-  "include": ["."],
+  "include": [
+    "."
+  ],
   "compilerOptions": {
     "rootDir": ".",
     "target": "ESNext",
@@ -8,7 +10,7 @@
     "noEmit": true,
     "allowJs": true,
     "checkJs": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true,

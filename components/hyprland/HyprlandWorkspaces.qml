@@ -6,58 +6,66 @@ import Quickshell.Hyprland
 
 import "root:/"
 import "root:/io"
-import "./"
+import "../shared"
 
 Item {
   id: root
   required property QsWindow window
-  implicitWidth: layout.implicitWidth + 30
-  implicitHeight: layout.implicitHeight + 2
-  property int iHeight: 13
-  property int iWidth: 13
+  width: layout.implicitWidth
+  height: Config.sizes.barHeight
 
   RowLayout {
     id: layout
     anchors.centerIn: parent
-    spacing: 15
-    implicitHeight: root.iHeight
-    implicitWidth: repeater.count * root.iWidth + 15
+    spacing: 21
+    implicitHeight: root.height
+    implicitWidth: repeater.totalCount * 15
     Repeater {
       id: repeater
-      model: HyprlandIO.sortedWorkspaces
-      property int count: HyprlandIO.sortedWorkspaces.length
-      InnerCircle {
-        id: toprect
-        implicitWidth: root.iWidth
-        implicitHeight: root.iHeight
+      model: 5
+      property list<HyprlandWorkspace> workspaces: HyprlandIO.sortedWorkspaces
+      property int totalCount: 5
+      property QtObject activeWorkspace: HyprlandIO.activeWorkspace
+      property color activeColor: Config.colors.red600
+      property color existingColor: Config.colors.red700
+      property color nonExistingColor: Config.colors.navy700
+      DotFunctional {
+        id: workdot
+        required property int index
+        property HyprlandWorkspace currWorkspace: repeater.workspaces[index] || null
+        property bool nonExisting: currWorkspace === null
+        ccolor: {
+          if (nonExisting) {
+            return Qt.alpha(repeater.nonExistingColor, 0.6);
+          }
+          if (currWorkspace.id === repeater.activeWorkspace.id) {
+            return repeater.activeColor;
+          }
+          if (currWorkspace.name === "special:scratchpad" && HyprlandIO.activeSpecial.active) {
+            return Qt.lighter(Config.colors.mainColor3, 1.8);
+          }
+          return repeater.existingColor;
+        }
+        dotSize: 7
+        MouseArea {
+          id: workdotMouseArea
+          acceptedButtons: Qt.LeftButton | Qt.RightButton
+          cursorShape: Qt.PointingHandCursor
+          anchors.fill: parent
+          hoverEnabled: true
+          onEntered: {
+            workdot.dotSize = 9;
+            workdot.hovered = true;
+          }
+          onExited: {
+            workdot.dotSize = 7;
+            workdot.hovered = false;
+          }
+          onClicked: mouse => {
+            console.log(HyprlandIO.sortedWorkspaces[workdot.index]);
+          }
+        }
       }
-    }
-  }
-
-  MouseArea {
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    anchors.fill: parent
-    hoverEnabled: true
-    onEntered: {
-      root.iHeight = 28;
-      root.iWidth = 28;
-    }
-    onExited: {
-      root.iHeight = 13;
-      root.iWidth = 13;
-    }
-    onClicked: mouse => {
-      console.log(Hyprland.workspaces);
-    }
-  }
-  Behavior on iWidth {
-    SmoothedAnimation {
-      velocity: 300
-    }
-  }
-  Behavior on iHeight {
-    SmoothedAnimation {
-      velocity: 300
     }
   }
 }

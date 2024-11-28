@@ -6,7 +6,6 @@ import "root:/"
 
 Rectangle {
   id: root
-  anchors.centerIn: parent
   implicitWidth: (memtext.memory < 20 ? 66 : 72) + 30
   implicitHeight: Config.sizes.barHeight
 

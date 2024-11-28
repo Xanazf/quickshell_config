@@ -9,6 +9,6 @@ Rectangle {
   color: "transparent"
 
   implicitWidth: item.width
-  implicitHeight: item.implicitHeight
+  implicitHeight: 39
   children: [item]
 }

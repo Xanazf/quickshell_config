@@ -1,0 +1,58 @@
+[
+  {
+    "current_weather": {
+      "interval": 900,
+      "is_day": 0,
+      "temperature": 2.6,
+      "time": "2024-11-19T07:00",
+      "weathercode": 2,
+      "winddirection": 272,
+      "windspeed": 9
+    },
+    "current_weather_units": {
+      "interval": "seconds",
+      "is_day": "",
+      "temperature": "°C",
+      "time": "iso8601",
+      "weathercode": "wmo code",
+      "winddirection": "°",
+      "windspeed": "km/h"
+    },
+    "elevation": 188,
+    "generationtime_ms": 0.14400482177734375,
+    "hourly": {
+      "apparent_temperature": -0.8,
+      "pressure_msl": 1012.1,
+      "relativehumidity_2m": 86,
+      "surface_pressure": 988.9
+    },
+    "hourly_units": {
+      "apparent_temperature": "°C",
+      "pressure_msl": "hPa",
+      "relativehumidity_2m": "%",
+      "surface_pressure": "hPa",
+      "time": "iso8601"
+    },
+    "latitude": 50.4375,
+    "longitude": 30.5,
+    "timezone": "Europe/Kiev",
+    "timezone_abbreviation": "EET",
+    "utc_offset_seconds": 7200
+  },
+  {
+    "elevation": 188,
+    "generationtime_ms": 0.08094310760498047,
+    "hourly": {
+      "uv_index": 0.65
+    },
+    "hourly_units": {
+      "time": "iso8601",
+      "uv_index": ""
+    },
+    "latitude": 50.5,
+    "longitude": 30.5,
+    "timezone": "Europe/Kiev",
+    "timezone_abbreviation": "EET",
+    "utc_offset_seconds": 7200
+  }
+]
