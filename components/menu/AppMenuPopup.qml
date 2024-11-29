@@ -12,9 +12,13 @@ Popup {
   required property QsWindow window
   required property Item parentRect
   required property bool show
+  property var childRect: rootrect
   setWindow: window
   setParentRect: parentRect
   setShow: show
+  onShowChanged: {
+    setShow = show;
+  }
   setWidth: appmenugrid.implicitWidth + 24
   setHeight: appmenugrid.implicitHeight + 24
   BorderSubtle {
@@ -29,6 +33,9 @@ Popup {
   WrapperRectangle {
     id: rootrect
     // props
+    property bool targetVisible: false
+    property Item owner: root.parentRect
+    property real targetRelativeX: root.QsWindow.window.contentItem.mapFromItem(root, 0, 0).x
 
     // sizing
     anchors.fill: parent

@@ -22,9 +22,12 @@ Scope {
     // Base
     PanelWindow {
       id: root
+      property real tooltipYOffset: height + 3
       // Needed for screens
       property var modelData
       screen: modelData
+      // function boundedX() {
+      // }
 
       // Positioning
       anchors {
@@ -55,10 +58,20 @@ Scope {
       }
 
       AppMenuPopup {
+        id: appMenuPopup
         window: root
         parentRect: appmenuItem
         show: appmenuRoot.showPopup
+        onSetShowChanged: {
+          if (appMenuPopup.setShow !== appmenuRoot.showPopup) {
+            appmenuRoot.showPopup = appMenuPopup.setShow;
+          }
+        }
       }
+      // AnimatedPopup {
+      //   id: animatedPopup
+      //   bar: root
+      // }
       // Left Side
       RowLayout {
         id: leftLayoutRoot

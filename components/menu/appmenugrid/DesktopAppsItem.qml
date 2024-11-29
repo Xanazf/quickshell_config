@@ -92,14 +92,18 @@ ClippingWrapperRectangle {
         hoverEnabled: true
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         onEntered: {
           modelRect.color = Qt.alpha("white", 0.2);
         }
         onExited: {
           modelRect.color = Qt.alpha("white", 0.1);
         }
-        onClicked: {
-          console.log(modelRect.modelData.actions);
+        onClicked: mouse => {
+          if (mouse.button === Qt.LeftButton) {
+            modelRect.QsWindow.window.setShow = false;
+            modelRect.modelData.execute();
+          }
         }
       }
       Behavior on color {
