@@ -11,7 +11,7 @@ GridLayout {
   rows: 4
   columnSpacing: 12
   rowSpacing: 12
-  implicitHeight: ((children.length - 1) * 150) + (children.length * 12) + 50
+  implicitHeight: ((children.length - 1) * 150) + (children.length * 12) + 40
   implicitWidth: 100 * children.length + children.length * 12
 
   UserArtItem {
@@ -61,7 +61,7 @@ GridLayout {
   }
   SystemTrayItem {
     Layout.alignment: Qt.AlignHCenter
-    Layout.preferredHeight: 50
+    Layout.preferredHeight: 40
     Layout.preferredWidth: root.implicitWidth - root.implicitWidth / 4
     Layout.columnSpan: 4
     Layout.column: 1

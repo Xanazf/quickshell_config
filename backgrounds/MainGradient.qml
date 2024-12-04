@@ -66,6 +66,7 @@ Rectangle {
     }
     NumberAnimation on positionOffset {
       id: numanim
+      running: !Config.powerSaving
       loops: Animation.Infinite
       duration: 30000
       from: -2.0

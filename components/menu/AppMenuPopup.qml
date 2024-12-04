@@ -33,9 +33,9 @@ Popup {
   WrapperRectangle {
     id: rootrect
     // props
-    property bool targetVisible: false
-    property Item owner: root.parentRect
-    property real targetRelativeX: root.QsWindow.window.contentItem.mapFromItem(root, 0, 0).x
+    //property bool targetVisible: false
+    //property Item owner: root.parentRect
+    //property real targetRelativeX: root.window.contentItem.mapFromItem(root, 0, 0).x
 
     // sizing
     anchors.fill: parent
@@ -48,18 +48,7 @@ Popup {
     //border.color: Config.colors.mainColor3
     radius: Config.sizes.mainRadius
     scale: root.show ? 1 : 0.8
-    Behavior on opacity {
-      NumberAnimation {
-        duration: 200
-        easing.type: Easing.InOutQuad
-      }
-    }
-    Behavior on scale {
-      NumberAnimation {
-        duration: 200
-        easing.type: Easing.InOutQuad
-      }
-    }
+
     child: AppMenuGrid {
       id: appmenugrid
     }

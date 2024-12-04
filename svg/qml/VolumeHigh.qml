@@ -4,7 +4,7 @@ import QtQuick.Shapes
 
 Item {
   id: root
-  required property string currentColor
+  required property color currentColor
   implicitWidth: 24
   implicitHeight: 24
   transform: [

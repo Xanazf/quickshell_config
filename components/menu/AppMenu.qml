@@ -1,11 +1,11 @@
 import QtQuick
-import Quickshell
+import Quickshell.Widgets
 
 import "root:/"
 import "root:/io"
 import "root:/svg/qml"
 
-Rectangle {
+ClippingRectangle {
   id: root
   width: 24
   implicitHeight: 30
@@ -14,12 +14,6 @@ Rectangle {
   property bool showPopup: false
   property bool hovering: false
   property bool targetVisible: false
-  property real animX: {
-    if (root.QsWindow.window) {
-      return root.QsWindow.window.contentItem.mapFromItem(root, 0, 0).x;
-    }
-    return 0;
-  }
 
   MouseArea {
     id: mouseArea1

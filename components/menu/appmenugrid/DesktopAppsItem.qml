@@ -13,16 +13,8 @@ ClippingWrapperRectangle {
   property ObjectModel appItems: DesktopIO.apps
   resizeChild: true
   margin: 10
-  BorderSubtle {
-    numOfBorders: 1
-    orientVertical: true
-    gradientColor1: Config.colors.mainColor2
-    gradientColor2: Config.colors.mainColor2
-  }
   child: GridView {
     id: desktopEntriesGrid
-    width: parent.width
-    height: parent.height
     model: root.appItems
     cellHeight: height / 3 + 3.33
     cellWidth: width / 4
@@ -71,8 +63,8 @@ ClippingWrapperRectangle {
         width: 40
         color: "transparent"
         IconImage {
-          width: 30
-          height: 30
+          width: 26
+          height: 26
           anchors.centerIn: parent
 
           source: Quickshell.iconPath(modelRect.modelData.icon, true) || "root:/svg/skull-outline.svg"

@@ -10,6 +10,8 @@ Singleton {
   property string username: "xnzf"
   property string distro: "Arch Linux (btw)"
 
+  property bool powerSaving: false
+
   property QtObject colors: QtObject {
     // surface colors
     property string neutral: "#010C1D"

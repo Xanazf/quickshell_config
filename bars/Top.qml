@@ -22,12 +22,9 @@ Scope {
     // Base
     PanelWindow {
       id: root
-      property real tooltipYOffset: height + 3
       // Needed for screens
       property var modelData
       screen: modelData
-      // function boundedX() {
-      // }
 
       // Positioning
       anchors {
@@ -37,13 +34,13 @@ Scope {
       }
 
       // Sizing
+      height: Config.sizes.barHeight
+      width: screen.width
       margins {
         top: 6
         right: 6
         left: 6
       }
-      height: Config.sizes.barHeight
-      width: screen.width
 
       // Styling
       color: "transparent"
