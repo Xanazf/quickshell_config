@@ -11,6 +11,7 @@ Singleton {
   property string distro: "Arch Linux (btw)"
 
   property bool powerSaving: false
+  property bool menuOpen: false
 
   property QtObject colors: QtObject {
     // surface colors

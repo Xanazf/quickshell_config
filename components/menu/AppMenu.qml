@@ -11,7 +11,7 @@ ClippingRectangle {
   implicitHeight: 30
   anchors.centerIn: parent
   color: "transparent"
-  property bool showPopup: false
+  property bool showPopup: Config.menuOpen
   property bool hovering: false
   property bool targetVisible: false
 
@@ -29,7 +29,7 @@ ClippingRectangle {
       root.hovering = false;
     }
     onClicked: {
-      root.showPopup = !root.showPopup;
+      Config.menuOpen = !Config.menuOpen;
     }
     ArchIcon {
       id: rootIcon

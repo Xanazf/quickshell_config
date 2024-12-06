@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 
+import "root:/"
+
 Singleton {
   property string currKeyboardLayout: "US"
   property list<HyprlandWorkspace> sortedWorkspaces: sortWorkspaces(Hyprland.workspaces.values)
@@ -47,49 +49,6 @@ Singleton {
     }
     return transform;
   }
-  function titleTransform(hclass, title) {
-    let newTitle;
-    switch (hclass) {
-    case "kitty":
-      {
-        let VimIndex = title.lastIndexOf("vim");
-        let orVim = VimIndex !== -1;
-        newTitle = orVim ? "󰄛  " + title.slice(VimIndex + 3) + "  " : "󰄛  " + title;
-        break;
-      }
-    case "discord":
-      {
-        newTitle = "󰙯  " + title.split("- Discord")[0];
-        break;
-      }
-    case "google-chrome":
-      {
-        let YTindex = title.lastIndexOf("YouTube");
-        let GoogleIndex = title.lastIndexOf("Google Chrome");
-        let orYT = YTindex !== -1;
-        let icon = orYT ? "   " : "  ";
-        let processedTitle = title.slice(0, orYT ? YTindex - 2 : GoogleIndex - 2);
-        newTitle = icon + processedTitle;
-        break;
-      }
-    case "firefox":
-      {
-        let YTindex = title.lastIndexOf("YouTube");
-        let GoogleIndex = title.lastIndexOf("Firefox");
-        let orYT = YTindex !== -1;
-        let icon = orYT ? "   " : "  ";
-        let processedTitle = title.slice(0, orYT ? YTindex - 2 : GoogleIndex - 2);
-        newTitle = icon + processedTitle;
-        break;
-      }
-    default:
-      {
-        newTitle = title;
-        break;
-      }
-    }
-    return newTitle;
-  }
 
   function sortWorkspaces(arr) {
     return [...arr].sort((a, b) => a.id - b.id);
@@ -120,7 +79,7 @@ Singleton {
         {
           let window = event.parse(2);
           activeWindow.hclass = window[0];
-          activeWindow.title = titleTransform(window[0], window[1]) ?? "";
+          activeWindow.title = window[1];
           break;
         }
       case "activespecial":
@@ -131,6 +90,18 @@ Singleton {
           activeSpecial.active = special[1] !== null;
           break;
         }
+      }
+    }
+  }
+  GlobalShortcut {
+    name: "menu"
+    onPressed: {
+      Config.menuOpen = !Config.menuOpen;
+      if (Config.menuOpen) {
+        Hyprland.dispatch("movecursor 150 100");
+      }
+      if (!Config.menuOpen) {
+        Hyprland.dispatch("movecursor 990 600");
       }
     }
   }

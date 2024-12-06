@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Wayland
 
 import "root:/"
 import "root:/backgrounds"
@@ -22,6 +23,10 @@ Scope {
     // Base
     PanelWindow {
       id: root
+      // props
+      //focusable: appMenuPopup.visible
+      WlrLayershell.keyboardFocus: appMenuPopup.visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+
       // Needed for screens
       property var modelData
       screen: modelData
