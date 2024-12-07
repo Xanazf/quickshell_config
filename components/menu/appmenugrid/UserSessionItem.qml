@@ -113,73 +113,13 @@ Rectangle {
         Row {
           id: puRow
           spacing: 6
-          Rectangle {
-            id: cpuRect
-            implicitHeight: puRect.implicitHeight
-            implicitWidth: puRect.implicitWidth * 0.20
-            color: "transparent"
-            anchors.verticalCenter: parent.verticalCenter
-            Canvas {
-              id: cpuCanvas
-              anchors.centerIn: parent
-              width: parent.implicitWidth
-              height: parent.implicitHeight
-              antialiasing: true
+          CircularProgress {
+            id: cpuCanvas
+            parentContainer: puRect
+            usedValue: root.usedCPU
+            totalValue: 100
 
-              property color sub30: Config.colors.green600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
-
-              property color currColor: root.usedCPU <= 30 ? sub30 : root.usedCPU <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(cpuCanvas.width - 10, cpuCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: root.usedCPU
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.usedCPU
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, cpuCanvas.width - 10, cpuCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(cpuCanvas.centerWidth, cpuCanvas.centerHeight, cpuCanvas.radius, angleOffset + cpuCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(cpuCanvas.centerWidth, cpuCanvas.centerHeight, cpuCanvas.radius, cpuCanvas.angleOffset, cpuCanvas.angleOffset + cpuCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              Text {
-                color: cpuCanvas.currColor
-                anchors.centerIn: parent
-                text: cpuCanvas.text
-              }
-            }
+            sub30Color: Config.colors.green600
           }
           Rectangle {
             id: gpuRect
@@ -360,174 +300,68 @@ Rectangle {
         implicitWidth: parent.implicitWidth
         color: Qt.alpha(Config.colors.neutral, 0.3)
         radius: Config.sizes.mainRadius
-        Row {
-          id: memRow
-          spacing: 36
-          anchors.horizontalCenter: parent.horizontalCenter
-          Rectangle {
-            id: ramWrap
-            //anchors.left: memRect.left
-            //anchors.leftMargin: ramText.width - 12
-            implicitWidth: memRect.implicitWidth * 0.20
-            implicitHeight: memRect.implicitHeight
-            color: "transparent"
-            Canvas {
-              id: ramCanvas
-              anchors.centerIn: parent
-              width: parent.implicitWidth > 10 ? parent.implicitWidth : 30
-              height: parent.implicitWidth > 10 ? parent.implicitHeight : 30
+        WrapperRectangle {
+          radius: memRect.radius
+          color: "#20000000"
+          margin: 3
+          Column {
+            spacing: 3
+            Text {
+              font.pixelSize: ramCanvas.implicitWidth / 4
               antialiasing: true
-
-              property real usedRAMPercent: (root.usedRAM / root.totalRAM) * 100
-
-              property color sub30: Config.colors.navy600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
-
-              property color currColor: Config.colors.mainColor4
-
-              //usedRAMPercent <= 30 ? sub30 : usedRAMPercent <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(ramCanvas.width - 10, ramCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: usedRAMPercent
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.usedRAM
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, ramCanvas.width - 10, ramCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(ramCanvas.centerWidth, ramCanvas.centerHeight, ramCanvas.radius, angleOffset + ramCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(ramCanvas.centerWidth, ramCanvas.centerHeight, ramCanvas.radius, ramCanvas.angleOffset, ramCanvas.angleOffset + ramCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              Text {
-                id: ramText
-                antialiasing: true
-                anchors.left: parent.right
-                font.pixelSize: 9
-                font.letterSpacing: 1
-                color: parent.currColor
-                text: `${root.usedRAM}/${root.totalRAM.toFixed(0) - 1}G`
-              }
-              RAMFilled {
-                implicitWidth: 18
-                implicitHeight: 18
-                anchors.centerIn: parent
-                currentColor: parent.currColor
-              }
+              color: Qt.lighter(ramCanvas.solidColor, 1.25)
+              text: ramCanvas.customText
+            }
+            Text {
+              font.pixelSize: swapCanvas.implicitWidth / 4
+              antialiasing: true
+              color: Qt.lighter(swapCanvas.solidColor, 1.25)
+              text: swapCanvas.customText
             }
           }
-          Rectangle {
-            id: swapWrap
-            //anchors.left: ramWrap.right
-            //anchors.leftMargin: ramText.width + 3
-            implicitWidth: memRect.implicitWidth * 0.20
-            implicitHeight: memRect.implicitHeight
-            color: "transparent"
-            Canvas {
-              id: swapCanvas
+        }
+        Row {
+          id: memRow
+          spacing: 15
+          anchors.horizontalCenter: parent.horizontalCenter
+          CircularProgress {
+            id: ramCanvas
+            parentContainer: memRect
+            usedValue: root.usedRAM
+            totalValue: root.totalRAM
+
+            useSolidColor: true
+            solidColor: Config.colors.mainColor4
+
+            alignTextLeft: true
+            customText: `${root.usedRAM}/${root.totalRAM.toFixed(0) - 1}G`
+            showText: false
+
+            icon: RAMFilled {
+              implicitWidth: 18
+              implicitHeight: 18
               anchors.centerIn: parent
-              width: parent.implicitWidth
-              height: parent.implicitHeight
-              antialiasing: true
+              currentColor: ramCanvas.solidColor
+            }
+          }
+          CircularProgress {
+            id: swapCanvas
+            parentContainer: memRect
+            usedValue: root.usedSwap
+            totalValue: root.totalSwap
 
-              property real usedSwapPercent: root.usedSwap !== 0 ? (root.usedSwap / root.totalSwap) * 100 : 0
+            useSolidColor: true
+            solidColor: Config.colors.navy600
 
-              property color sub30: Config.colors.navy600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
+            alignTextRight: true
+            customText: `${root.usedSwap}/${root.totalSwap.toFixed(0)}G`
+            showText: false
 
-              property color currColor: sub30
-
-              //usedRAMPercent <= 30 ? sub30 : usedRAMPercent <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(swapCanvas.width - 10, swapCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: usedSwapPercent
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.usedSwap
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, swapCanvas.width - 10, swapCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(swapCanvas.centerWidth, swapCanvas.centerHeight, swapCanvas.radius, angleOffset + swapCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(swapCanvas.centerWidth, swapCanvas.centerHeight, swapCanvas.radius, swapCanvas.angleOffset, swapCanvas.angleOffset + swapCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              Text {
-                id: swapText
-                antialiasing: true
-                anchors.left: parent.right
-                font.pixelSize: 9
-                font.letterSpacing: 1
-                color: parent.currColor
-                text: `${root.usedSwap}/${root.totalSwap.toFixed(0)}G`
-              }
-              RAMOutline {
-                implicitWidth: 18
-                implicitHeight: 18
-                anchors.centerIn: parent
-                currentColor: parent.currColor
-              }
+            icon: RAMOutline {
+              implicitWidth: 18
+              implicitHeight: 18
+              anchors.centerIn: parent
+              currentColor: swapCanvas.solidColor
             }
           }
         }
@@ -542,254 +376,53 @@ Rectangle {
           id: diskRow
           spacing: 6
           anchors.horizontalCenter: parent.horizontalCenter
-          Rectangle {
-            id: diskSdaWrap
-            implicitHeight: diskRect.implicitHeight
-            implicitWidth: diskRect.implicitWidth * 0.20
-            color: "transparent"
-            Canvas {
-              id: diskSdaCanvas
+          CircularProgress {
+            id: diskSdaCanvas
+            parentContainer: diskRect
+            usedValue: root.sdaUsed
+            totalValue: root.sdaTotal
+
+            useSolidColor: true
+            solidColor: Config.colors.navy600
+
+            customText: "/"
+          }
+          CircularProgress {
+            id: diskSdbCanvas
+            parentContainer: diskRect
+            usedValue: root.sdbUsed
+            totalValue: root.sdbTotal
+
+            useSolidColor: true
+            solidColor: Config.colors.mainColor3
+
+            customText: "/sdb"
+            showText: false
+            icon: SSDOutline {
+              id: diskSdbIcon
+              implicitWidth: 18
+              implicitHeight: 18
               anchors.centerIn: parent
-              width: parent.implicitWidth > 10 ? parent.implicitWidth : 30
-              height: parent.implicitWidth > 10 ? parent.implicitHeight : 30
-              antialiasing: true
-
-              property real usedDiskPercent: root.sdaUsed !== 0 ? (root.sdaUsed / root.sdaTotal) * 100 : 0
-
-              property color sub30: Config.colors.navy600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
-
-              property color currColor: sub60
-
-              //usedRAMPercent <= 30 ? sub30 : usedRAMPercent <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(diskSdaCanvas.width - 10, diskSdaCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: usedDiskPercent
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.sdaUsed
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, diskSdaCanvas.width - 10, diskSdaCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(diskSdaCanvas.centerWidth, diskSdaCanvas.centerHeight, diskSdaCanvas.radius, angleOffset + diskSdaCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(diskSdaCanvas.centerWidth, diskSdaCanvas.centerHeight, diskSdaCanvas.radius, diskSdaCanvas.angleOffset, diskSdaCanvas.angleOffset + diskSdaCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              SSDFilled {
-                id: diskSdaIcon
-                visible: false
-                implicitWidth: 12
-                implicitHeight: 12
-                //anchors.horizontalCenter: parent.horizontalCenter
-                //anchors.top: parent.top
-                //anchors.topMargin: 5
-                anchors.centerIn: parent
-                currentColor: Qt.lighter(parent.currColor, 1.25)
-              }
-              Text {
-                font.pixelSize: 12
-                antialiasing: true
-                anchors.centerIn: parent
-                //anchors.top: diskSdaIcon.bottom
-                //anchors.horizontalCenter: parent.horizontalCenter
-                color: Qt.lighter(parent.currColor, 1.25)
-                text: "/"
-              }
+              currentColor: Qt.lighter(diskSdbCanvas.solidColor, 1.25)
             }
           }
-          Rectangle {
-            id: diskSdbWrap
-            implicitHeight: diskRect.implicitHeight
-            implicitWidth: diskRect.implicitWidth * 0.20
-            color: "transparent"
-            Canvas {
-              id: diskSdbCanvas
+          CircularProgress {
+            id: diskSdcCanvas
+            parentContainer: diskRect
+            usedValue: root.sdcUsed
+            totalValue: root.sdcTotal
+
+            useSolidColor: true
+            solidColor: Config.colors.mainColor4
+
+            customText: "/sdc"
+            showText: false
+            icon: SSDFilled {
+              id: diskSdcIcon
+              implicitWidth: 18
+              implicitHeight: 18
               anchors.centerIn: parent
-              width: parent.implicitWidth
-              height: parent.implicitHeight
-              antialiasing: true
-
-              property real usedDiskPercent: root.sdbUsed !== 0 ? (root.sdbUsed / root.sdbTotal) * 100 : 0
-
-              property color sub30: Config.colors.navy600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
-
-              property color currColor: Config.colors.mainColor3
-
-              //usedRAMPercent <= 30 ? sub30 : usedRAMPercent <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(diskSdbCanvas.width - 10, diskSdbCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: usedDiskPercent
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.sdbUsed
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, diskSdbCanvas.width - 10, diskSdbCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(diskSdbCanvas.centerWidth, diskSdbCanvas.centerHeight, diskSdbCanvas.radius, angleOffset + diskSdbCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(diskSdbCanvas.centerWidth, diskSdbCanvas.centerHeight, diskSdbCanvas.radius, diskSdbCanvas.angleOffset, diskSdbCanvas.angleOffset + diskSdbCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              SSDOutline {
-                id: diskSdbIcon
-                implicitWidth: 18
-                implicitHeight: 18
-                anchors.centerIn: parent
-                currentColor: Qt.lighter(parent.currColor, 1.25)
-              }
-              Text {
-                visible: false
-                font.pixelSize: 9
-                antialiasing: true
-                anchors.top: diskSdbIcon.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Qt.lighter(parent.currColor, 1.25)
-                text: "/sdb"
-              }
-            }
-          }
-          Rectangle {
-            id: diskSdcWrap
-            implicitHeight: diskRect.implicitHeight
-            implicitWidth: diskRect.implicitWidth * 0.20
-            color: "transparent"
-            Canvas {
-              id: diskSdcCanvas
-              anchors.centerIn: parent
-              width: parent.implicitWidth > 10 ? parent.implicitWidth : 30
-              height: parent.implicitWidth > 10 ? parent.implicitHeight : 30
-              antialiasing: true
-
-              property real usedDiskPercent: root.sdcUsed !== 0 ? (root.sdcUsed / root.sdcTotal) * 100 : 0
-
-              property color sub30: Config.colors.navy600
-              property color sub60: Config.colors.yellow700
-              property color past61: Config.colors.red800
-
-              property color currColor: Config.colors.mainColor4
-
-              //usedRAMPercent <= 30 ? sub30 : usedRAMPercent <= 60 ? sub60 : past61
-
-              property real centerWidth: width / 2
-              property real centerHeight: height / 2
-              property real radius: Math.min(diskSdcCanvas.width - 10, diskSdcCanvas.height - 10) / 2
-
-              property real minimumValue: 0
-              property real maximumValue: 100
-              property real currentValue: usedDiskPercent
-
-              property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI
-              property real angleOffset: -Math.PI / 2
-
-              property string text: root.sdcUsed
-
-              onSub30Changed: requestPaint()
-              onSub60Changed: requestPaint()
-              onPast61Changed: requestPaint()
-              onMinimumValueChanged: requestPaint()
-              onMaximumValueChanged: requestPaint()
-              onCurrentValueChanged: requestPaint()
-
-              onPaint: {
-                let ctx = getContext("2d");
-                ctx.save();
-
-                ctx.clearRect(0, 0, diskSdcCanvas.width - 10, diskSdcCanvas.height - 10);
-
-                // angle to 2*PI
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = Config.colors.neutral;
-                ctx.arc(diskSdcCanvas.centerWidth, diskSdcCanvas.centerHeight, diskSdcCanvas.radius, angleOffset + diskSdcCanvas.angle, angleOffset + 2 * Math.PI);
-                ctx.stroke();
-
-                // 0 to angle
-                ctx.beginPath();
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = currColor;
-                ctx.arc(diskSdcCanvas.centerWidth, diskSdcCanvas.centerHeight, diskSdcCanvas.radius, diskSdcCanvas.angleOffset, diskSdcCanvas.angleOffset + diskSdcCanvas.angle);
-                ctx.stroke();
-
-                ctx.restore();
-              }
-              SSDOutline {
-                id: diskSdcIcon
-                implicitWidth: 18
-                implicitHeight: 18
-                anchors.centerIn: parent
-                currentColor: Qt.lighter(parent.currColor, 1.25)
-              }
-              Text {
-                visible: false
-                font.pixelSize: 9
-                antialiasing: true
-                anchors.top: diskSdcIcon.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Qt.lighter(parent.currColor, 1.25)
-                text: "/sdc"
-              }
+              currentColor: Qt.lighter(diskSdcCanvas.solidColor, 1.25)
             }
           }
         }
