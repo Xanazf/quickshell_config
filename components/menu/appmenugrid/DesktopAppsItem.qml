@@ -112,6 +112,14 @@ ClippingWrapperRectangle {
               desktopEntriesGrid.moveCurrentIndexUp();
               break;
             }
+          case Qt.Key_Return:
+            {
+              if (focus & interactive) {
+                model[currentIndex].execute();
+                Config.menuOpen = false;
+              }
+              break;
+            }
           case Qt.Key_B:
             {
               desktopEntriesGrid.interactive = false;
@@ -186,6 +194,8 @@ ClippingWrapperRectangle {
             }
           }
         }
+
+        Keys.onEnterPressed: {}
         delegate: Rectangle {
           id: modelRect
           required property QtObject modelData

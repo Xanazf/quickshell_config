@@ -19,7 +19,7 @@ while :; do
 	cpu_last=("${cpu_now[@]}")
 	cpu_last_sum=$cpu_sum
 
-	echo "$cpu_usage"
+	printf '%s\n' "$cpu_usage"
 
-	sleep 60
+	sleep 1
 done
