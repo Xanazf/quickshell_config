@@ -30,6 +30,6 @@ Singleton {
     interval: 5 * 60 * 60 * 1000 // hours * minutes * seconds * ms
     running: true
     repeat: true
-    onTriggered: date = new Date()
+    onTriggered: datevar = new Date()
   }
 }

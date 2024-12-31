@@ -9,6 +9,8 @@ import Quickshell.Io
 Singleton {
   id: root
 
+  property string workingDirectory: "/home/xnzf/.config/quickshell/"
+
   // host info
   property string uptime
   property string host
@@ -143,7 +145,7 @@ Singleton {
   Process {
     id: getCPUinfo
     command: ["sh", "-c", "./cpuinfo.sh"]
-    workingDirectory: `${Quickshell.workingDirectory}/io/`
+    workingDirectory: `${root.workingDirectory}/io/`
     running: true
     stdout: SplitParser {
       onRead: data => {

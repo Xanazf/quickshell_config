@@ -41,7 +41,7 @@ Rectangle {
           }
         case 1:
           {
-            link = "root:/svg/weather/weather-partly-cloudy.svg";
+            link = "root:/svg/weather/weather-sunny-alert.svg";
             break;
           }
         case 2:
@@ -59,14 +59,29 @@ Rectangle {
             link = "root:/svg/weather/weather-fog.svg";
             break;
           }
-        case (51 || 53 || 55):
+        case (51):
           {
-            link = "root:/svg/weather/weather-hazy.svg";
+            link = "root:/svg/weather/weather-partly-rainy.svg";
             break;
           }
-        case (56 || 57):
+        case (53):
           {
-            link = "root:/svg/weather/weather-hazy.svg";
+            link = "root:/svg/weather/weather-partly-snowy-rainy.svg";
+            break;
+          }
+        case (55):
+          {
+            link = "root:/svg/weather/weather-partly-snowy-rainy.svg";
+            break;
+          }
+        case (56):
+          {
+            link = "root:/svg/weather/weather-partly-snowy.svg";
+            break;
+          }
+        case (57):
+          {
+            link = "root:/svg/weather/weather-snowy.svg";
             break;
           }
         case 61:
@@ -74,9 +89,14 @@ Rectangle {
             link = "root:/svg/weather/weather-rainy.svg";
             break;
           }
-        case (66 || 67):
+        case (66):
           {
             link = "root:/svg/weather/weather-rainy.svg";
+            break;
+          }
+        case (67):
+          {
+            link = "root:/svg/weather/weather-snowy-rainy.svg";
             break;
           }
         case 71:
@@ -86,37 +106,57 @@ Rectangle {
           }
         case 73:
           {
-            link = "root:/svg/weather/weather-snowy-rainy.svg";
+            link = "root:/svg/weather/weather-snowy.svg";
             break;
           }
         case 75:
           {
-            link = "root:/svg/weather/weather-snowy-heavy.svg";
+            link = "root:/svg/weather/weather-snowy.svg";
             break;
           }
         case (77):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/svg/weather/weather-hail.svg";
             break;
           }
-        case (80 || 81 || 82):
+        case (80):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/svg/weather/weather-pouring.svg";
             break;
           }
-        case (85 || 86):
+        case (81):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/svg/weather/weather-pouring.svg";
+            break;
+          }
+        case (82):
+          {
+            link = "root:/svg/weather/weather-lightning-rainy.svg";
+            break;
+          }
+        case (85):
+          {
+            link = "root:/svg/weather/weather-snowy-heavy.svg";
+            break;
+          }
+        case (86):
+          {
+            link = "root:/svg/weather/weather-snowy-heavy.svg";
             break;
           }
         case (95):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/svg/weather/weather-lightning.svg";
             break;
           }
-        case (96 || 99):
+        case (96):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/svg/weather/weather-lightning-rainy.svg";
+            break;
+          }
+        case (99):
+          {
+            link = "root:/svg/weather/weather-hurricane.svg";
             break;
           }
         }
@@ -172,37 +212,76 @@ Rectangle {
           case 3:
             link = root.wmo_1_2_3;
             break;
-          case (45 || 48):
+          case (45):
             link = root.wmo_45_48;
             break;
-          case (51 || 53 || 55):
+          case (48):
+            link = root.wmo_45_48;
+            break;
+          case (51):
             link = root.wmo_51_53_55;
             break;
-          case (56 || 57):
+          case (53):
+            link = root.wmo_51_53_55;
+            break;
+          case (55):
+            link = root.wmo_51_53_55;
+            break;
+          case (56):
             link = root.wmo_56_57;
             break;
-          case (61 || 63 || 65):
+          case (57):
+            link = root.wmo_56_57;
+            break;
+          case (61):
             link = root.wmo_61_63_65;
             break;
-          case (66 || 67):
+          case (63):
+            link = root.wmo_61_63_65;
+            break;
+          case (65):
+            link = root.wmo_61_63_65;
+            break;
+          case (66):
             link = root.wmo_66_67;
             break;
-          case (71 || 73 || 75):
+          case (67):
+            link = root.wmo_66_67;
+            break;
+          case (71):
+            link = root.wmo_71_73_75;
+            break;
+          case (73):
+            link = root.wmo_71_73_75;
+            break;
+          case (75):
             link = root.wmo_71_73_75;
             break;
           case (77):
             link = root.wmo_77;
             break;
-          case (80 || 81 || 82):
+          case (80):
             link = root.wmo_80_81_82;
             break;
-          case (85 || 86):
+          case (81):
+            link = root.wmo_80_81_82;
+            break;
+          case (82):
+            link = root.wmo_80_81_82;
+            break;
+          case (85):
+            link = root.wmo_85_86;
+            break;
+          case (86):
             link = root.wmo_85_86;
             break;
           case (95):
             link = root.wmo_95;
             break;
-          case (96 || 99):
+          case (96):
+            link = root.wmo_96_99;
+            break;
+          case (99):
             link = root.wmo_96_99;
             break;
           default:

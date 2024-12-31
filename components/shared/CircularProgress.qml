@@ -70,7 +70,7 @@ ClippingRectangle {
 
     onPaint: {
       let ctx = getContext("2d");
-      ctx.save();
+      ctx.reset();
 
       ctx.clearRect(0, 0, rootCanvas.width - (rootCanvas.width * 0.10), rootCanvas.height - (rootCanvas.height * 0.10));
 
@@ -87,8 +87,6 @@ ClippingRectangle {
       ctx.strokeStyle = currColor;
       ctx.arc(rootCanvas.centerWidth, rootCanvas.centerHeight, rootCanvas.radius, rootCanvas.angleOffset, rootCanvas.angleOffset + rootCanvas.angle);
       ctx.stroke();
-
-      ctx.restore();
     }
     WrapperItem {
       id: diskSdaIcon
