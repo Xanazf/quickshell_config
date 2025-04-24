@@ -2,7 +2,7 @@
 
 ## Requirements
 
->[!IMPORTANT] Keep in mind
+>[!INFO] Keep in mind
 > This config has been **built for Arch Linux**.
 > If you wish to expand the config to other distros, please don't hesitate to PR.
 
