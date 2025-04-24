@@ -3,8 +3,7 @@ import Quickshell
 import Quickshell.Widgets
 
 import "root:/"
-import "../../shared"
-import "root:/io"
+import "root:/helpers/io"
 
 ClippingWrapperRectangle {
   id: root
@@ -217,7 +216,7 @@ ClippingWrapperRectangle {
               height: 26
               anchors.centerIn: parent
 
-              source: Quickshell.iconPath(modelRect.modelData.icon, true) || "root:/svg/skull-outline.svg"
+              source: Quickshell.iconPath(modelRect.modelData.icon, true) || "root:/assets/svg/skull-outline.svg"
             }
           }
           Text {

@@ -36,33 +36,18 @@ Scope {
         autoPlay: true
         loops: MediaPlayer.Infinite
         fillMode: VideoOutput.Stretch
-        source: Config.powerSaving ? "" : "root:/wallpapers/pinksunwave.mp4"
+        source: Config.powerSaving ? "" : "root:/assets/wallpapers/pinksunwave.mp4"
       }
 
-      Rectangle {
-        id: imageBg
+      Image {
+        id: imgBg
         visible: Config.powerSaving
-        anchors.fill: parent
-        color: Config.colors.yellow900
-        layer {
-          enabled: Config.powerSaving
-          effect: MultiEffect {
-            maskSpreadAtMin: 1.0
-            maskThresholdMax: 0.5
-            maskEnabled: Config.powerSaving
-            maskInverted: true
-            maskSource: Image {
-              fillMode: Image.PreserveAspectFit
-              mipmap: true
-              autoTransform: false
-              sourceSize.height: 200
-              sourceSize.width: 200
-              height: 200
-              width: 200
-              source: "root:/wallpapers/nuclear-hexagon-1.png"
-            }
-          }
-        }
+        fillMode: Image.PreserveAspectFit
+        mipmap: true
+        autoTransform: false
+        width: 1920
+        height: 1080
+        source: "root:/assets/wallpapers/forest.jpg"
       }
     }
   }

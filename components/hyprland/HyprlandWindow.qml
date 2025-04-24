@@ -2,8 +2,7 @@ import QtQuick
 import Quickshell
 
 import "root:/"
-import "root:/io"
-import "root:/components/shared"
+import "root:/helpers/io"
 
 Rectangle {
   id: root

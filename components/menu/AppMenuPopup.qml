@@ -3,8 +3,9 @@ import Quickshell.Widgets
 import QtQuick
 
 import "root:/"
-import "root:/io"
-import "../shared"
+import "root:/helpers/io"
+import "../shared/containers/"
+import "../shared/decorations/"
 import "./appmenugrid"
 
 Popup {

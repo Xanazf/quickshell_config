@@ -1,11 +1,12 @@
 //@ pragma UseQApplication
+//@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 
 import "root:/"
-import "root:/bars"
-import "root:/components/shared"
-import "root:/components"
+import "root:/components/bars/"
+import "root:/components/shared/templates/"
+import "root:/components/"
 
 ShellRoot {
   id: root
@@ -13,9 +14,9 @@ ShellRoot {
   // post-render
   Component.onCompleted: Config
 
-  Top {}
+  Main {}
+  Wallpaper {}
   // Popup on Quickshell reload
   ReloadPopup {}
   // --
-  Wallpaper {}
 }

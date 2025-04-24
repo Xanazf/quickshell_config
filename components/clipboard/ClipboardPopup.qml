@@ -4,8 +4,9 @@ import Qt.labs.qmlmodels
 import QtQml
 
 import "root:/"
-import "root:/io"
-import "../shared"
+import "root:/helpers/io"
+import "../shared/decorations/"
+import "../shared/containers/"
 
 Popup {
   id: root

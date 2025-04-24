@@ -2,8 +2,8 @@ import QtQuick
 import Quickshell.Widgets
 
 import "root:/"
-import "root:/io"
-import "root:/svg/qml"
+import "root:/helpers/io"
+import "root:/assets/svg/qml"
 
 ClippingRectangle {
   id: root

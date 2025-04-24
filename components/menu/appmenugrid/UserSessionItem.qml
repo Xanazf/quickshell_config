@@ -2,9 +2,10 @@ import QtQuick
 import Quickshell.Widgets
 
 import "root:/"
-import "root:/io"
-import "root:/svg/qml"
-import "../../shared"
+import "root:/helpers/io/"
+import "root:/assets/svg/qml/"
+import "../../shared/decorations/"
+import "../../shared/templates/"
 
 Rectangle {
   id: root

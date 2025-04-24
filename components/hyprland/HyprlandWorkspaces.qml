@@ -5,8 +5,8 @@ import Quickshell
 import Quickshell.Hyprland
 
 import "root:/"
-import "root:/io"
-import "../shared"
+import "root:/helpers/io"
+import "../shared/templates/"
 
 Item {
   id: root
@@ -29,7 +29,7 @@ Item {
       property color activeColor: Config.colors.red600
       property color existingColor: Config.colors.red700
       property color nonExistingColor: Config.colors.navy700
-      DotFunctional {
+      ActionDot {
         id: workdot
         required property int index
         property HyprlandWorkspace currWorkspace: repeater.workspaces[index] || null

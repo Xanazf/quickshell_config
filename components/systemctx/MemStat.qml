@@ -1,8 +1,8 @@
 import QtQuick
 import Quickshell
 
-import "root:/io"
 import "root:/"
+import "root:/helpers/io"
 
 Rectangle {
   id: root

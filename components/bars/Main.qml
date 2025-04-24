@@ -4,8 +4,9 @@ import Quickshell
 import Quickshell.Wayland
 
 import "root:/"
-import "root:/backgrounds"
-import "root:/components/shared"
+import "root:/components/backgrounds"
+import "root:/components/shared/containers/"
+import "root:/components/shared/decorations/"
 import "root:/components"
 import "root:/components/datetime"
 import "root:/components/hyprland"
@@ -31,7 +32,7 @@ Scope {
       property var modelData
       screen: modelData
 
-      // Positioning
+      // Orientation
       anchors {
         top: true
         left: true
@@ -86,7 +87,7 @@ Scope {
 
         // Items
         BarItem {
-          DotDecoration {
+          Dot {
             transparent: true
           }
         }
@@ -98,7 +99,7 @@ Scope {
           }
         }
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
 
         // -- Update
@@ -106,7 +107,7 @@ Scope {
           UpdateComponent {}
         }
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
         // -- Window
         BarItem {
@@ -149,7 +150,7 @@ Scope {
         }
         // -- System Tray
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
         // -- Audio
         BarItem {
@@ -157,28 +158,28 @@ Scope {
           Audio {}
         }
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
         // -- Keyboard
         BarItem {
           KbLayout {}
         }
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
         // -- Clock
         BarItem {
           Clock {}
         }
         BarItem {
-          DotDecoration {}
+          Dot {}
         }
         // -- System Menu
         BarItem {
           SysMenu {}
         }
         BarItem {
-          DotDecoration {
+          Dot {
             transparent: true
           }
         }

@@ -5,20 +5,39 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 
+import "./state/"
+import "./helpers/io/"
+
 Singleton {
   id: root
-  property string username: "xnzf"
-  property string distro: "Arch Linux (btw)"
 
-  property bool powerSaving: false
-  property bool menuOpen: false
+  // initialize state
+  property bool dev: true
+  property var state: StateMachine
+
+  property string username: state.username
+  property string distro: state.distro ?? "Arch Linux (btw)"
+
+  property bool powerSaving: true
+  property bool menuOpen: state.menuOpen
+
+  ColorQuantizer {
+    id: colorGenerator
+    source: Qt.resolvedUrl("./assets/wallpapers/forest-cropped.png")
+    depth: 4
+  }
 
   property QtObject colors: QtObject {
     // surface colors
     property string neutral: "#010C1D"
     property string fontcolor: "#E2ECFE"
 
+    property list<color> genColors: {
+      return colorGenerator.colors;
+    }
     // main colors
+    property string main1: "#DB0037"
+    property string main2: "#1911A6"
     property string mainColor0: "#111160"
     property string mainColor1: "#0F0679"
     property string mainColor2: "#1911A6"
@@ -26,6 +45,14 @@ Singleton {
     property string mainColor4: "#C80E65"
     property string mainColor5: "#FF0044"
     property string mainColor6: "#DB0037"
+
+    //property string mainColor0: genColors[0]
+    //property string mainColor1: genColors[2]
+    //property string mainColor2: genColors[3]
+    //property string mainColor3: genColors[5]
+    //property string mainColor4: genColors[9]
+    //property string mainColor5: genColors[11]
+    //property string mainColor6: genColors[12]
 
     // ui colors
     // -- danger
@@ -67,26 +94,10 @@ Singleton {
   // for animations
   property int frameRate: 60
 
-  // username
-  property string name: "xnzf"
-  property string shell: Quickshell.env("SHELL") ?? "bash"
-
   // universal sizes
   property QtObject sizes: QtObject {
     property int barHeight: 39
     property int barMargin: 6
     property int mainRadius: 15
-  }
-
-  // user terminal (kitty), user shell (fish)
-  property string terminal: Quickshell.env("TERM") ?? "gnome-terminal"
-
-  Component.onCompleted: () => {
-    console.log("Hello, " + root.name + "!");
-  }
-
-  // Pipewire binding
-  PwObjectTracker {
-    objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
   }
 }

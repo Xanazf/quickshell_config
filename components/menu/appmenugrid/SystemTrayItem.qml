@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Widgets
 
 import "root:/"
-import "../../systemctx/"
+import "root:/components/systemctx/"
 
 WrapperRectangle {
   id: root

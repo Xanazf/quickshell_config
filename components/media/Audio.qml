@@ -4,8 +4,8 @@ import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
 import "root:/"
-import "root:/io"
-import "root:/svg/qml"
+import "root:/helpers/io"
+import "root:/assets/svg/qml"
 
 Rectangle {
   id: root

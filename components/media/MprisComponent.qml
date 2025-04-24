@@ -5,9 +5,9 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Services.Mpris
 
-import "root:/io"
 import "root:/"
-import "../shared"
+import "root:/helpers/io"
+import "../shared/templates/"
 
 Rectangle {
   id: root
@@ -193,7 +193,7 @@ Rectangle {
             VectorImage {
               preferredRendererType: VectorImage.GeometryRenderer
               anchors.centerIn: parent
-              source: "root:/svg/media/skip-previous-outline.svg"
+              source: "root:/assets/svg/media/skip-previous-outline.svg"
             }
             onPressEvent: root.player?.previous()
           }
@@ -207,7 +207,7 @@ Rectangle {
             VectorImage {
               preferredRendererType: VectorImage.GeometryRenderer
               anchors.centerIn: parent
-              source: !root.playing ? "root:/svg/media/play-outline.svg" : "root:/svg/media/pause.svg"
+              source: !root.playing ? "root:/assets/svg/media/play-outline.svg" : "root:/assets/svg/media/pause.svg"
             }
             onPressEvent: {
               if (root.canTogglePlaying) {
@@ -226,7 +226,7 @@ Rectangle {
             VectorImage {
               preferredRendererType: VectorImage.GeometryRenderer
               anchors.centerIn: parent
-              source: "root:/svg/media/skip-next-outline.svg"
+              source: "root:/assets/svg/media/skip-next-outline.svg"
             }
             onPressEvent: root.player?.next()
           }

@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 
 import "root:/"
-import "root:/io"
+import "root:/helpers/io"
 
 Rectangle {
   color: "transparent"

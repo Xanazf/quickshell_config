@@ -40,13 +40,17 @@ Singleton {
   property list<string> sdaChildren
   property list<string> sdbChildren
   property list<string> sdcChildren
+  property list<string> nvme0n1Children
+  //property list<string> nvmeXnYChildren
 
   property real sdaUsed
   property real sdbUsed
   property real sdcUsed
+  property real nvme0n1Used
   property real sdaTotal
   property real sdbTotal
   property real sdcTotal
+  property real nvme0n1Total
 
   // universal minute timer
   Timer {
@@ -145,7 +149,7 @@ Singleton {
   Process {
     id: getCPUinfo
     command: ["sh", "-c", "./cpuinfo.sh"]
-    workingDirectory: `${root.workingDirectory}/io/`
+    workingDirectory: `${root.workingDirectory}/helpers/io/`
     running: true
     stdout: SplitParser {
       onRead: data => {
@@ -191,6 +195,7 @@ Singleton {
       splitMarker: ""
       onRead: data => {
         const parsed = JSON.parse(data);
+        //console.log(data);
         const blockdevices = parsed.blockdevices;
         let swap;
         for (const device of blockdevices) {

@@ -2,7 +2,6 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 
 import "root:/"
-import "root:/components/shared"
 
 Item {
   id: root

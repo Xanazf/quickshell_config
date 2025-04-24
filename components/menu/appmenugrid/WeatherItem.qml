@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.VectorImage
 
 import "root:/"
-import "root:/io"
+import "root:/helpers/io/"
 
 Rectangle {
   id: root
@@ -36,133 +36,133 @@ Rectangle {
         switch (root.currentWeather.weathercode) {
         case 0:
           {
-            link = "root:/svg/weather/weather-sunny.svg";
+            link = "root:/assets/svg/weather/weather-sunny.svg";
             break;
           }
         case 1:
           {
-            link = "root:/svg/weather/weather-sunny-alert.svg";
+            link = "root:/assets/svg/weather/weather-sunny-alert.svg";
             break;
           }
         case 2:
           {
-            link = "root:/svg/weather/weather-partly-cloudy.svg";
+            link = "root:/assets/svg/weather/weather-partly-cloudy.svg";
             break;
           }
         case 3:
           {
-            link = "root:/svg/weather/weather-partly-cloudy.svg";
+            link = "root:/assets/svg/weather/weather-partly-cloudy.svg";
             break;
           }
         case 45:
           {
-            link = "root:/svg/weather/weather-fog.svg";
+            link = "root:/assets/svg/weather/weather-fog.svg";
             break;
           }
         case (51):
           {
-            link = "root:/svg/weather/weather-partly-rainy.svg";
+            link = "root:/assets/svg/weather/weather-partly-rainy.svg";
             break;
           }
         case (53):
           {
-            link = "root:/svg/weather/weather-partly-snowy-rainy.svg";
+            link = "root:/assets/svg/weather/weather-partly-snowy-rainy.svg";
             break;
           }
         case (55):
           {
-            link = "root:/svg/weather/weather-partly-snowy-rainy.svg";
+            link = "root:/assets/svg/weather/weather-partly-snowy-rainy.svg";
             break;
           }
         case (56):
           {
-            link = "root:/svg/weather/weather-partly-snowy.svg";
+            link = "root:/assets/svg/weather/weather-partly-snowy.svg";
             break;
           }
         case (57):
           {
-            link = "root:/svg/weather/weather-snowy.svg";
+            link = "root:/assets/svg/weather/weather-snowy.svg";
             break;
           }
         case 61:
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/assets/svg/weather/weather-rainy.svg";
             break;
           }
         case (66):
           {
-            link = "root:/svg/weather/weather-rainy.svg";
+            link = "root:/assets/svg/weather/weather-rainy.svg";
             break;
           }
         case (67):
           {
-            link = "root:/svg/weather/weather-snowy-rainy.svg";
+            link = "root:/assets/svg/weather/weather-snowy-rainy.svg";
             break;
           }
         case 71:
           {
-            link = "root:/svg/weather/weather-snowy.svg";
+            link = "root:/assets/svg/weather/weather-snowy.svg";
             break;
           }
         case 73:
           {
-            link = "root:/svg/weather/weather-snowy.svg";
+            link = "root:/assets/svg/weather/weather-snowy.svg";
             break;
           }
         case 75:
           {
-            link = "root:/svg/weather/weather-snowy.svg";
+            link = "root:/assets/svg/weather/weather-snowy.svg";
             break;
           }
         case (77):
           {
-            link = "root:/svg/weather/weather-hail.svg";
+            link = "root:/assets/svg/weather/weather-hail.svg";
             break;
           }
         case (80):
           {
-            link = "root:/svg/weather/weather-pouring.svg";
+            link = "root:/assets/svg/weather/weather-pouring.svg";
             break;
           }
         case (81):
           {
-            link = "root:/svg/weather/weather-pouring.svg";
+            link = "root:/assets/svg/weather/weather-pouring.svg";
             break;
           }
         case (82):
           {
-            link = "root:/svg/weather/weather-lightning-rainy.svg";
+            link = "root:/assets/svg/weather/weather-lightning-rainy.svg";
             break;
           }
         case (85):
           {
-            link = "root:/svg/weather/weather-snowy-heavy.svg";
+            link = "root:/assets/svg/weather/weather-snowy-heavy.svg";
             break;
           }
         case (86):
           {
-            link = "root:/svg/weather/weather-snowy-heavy.svg";
+            link = "root:/assets/svg/weather/weather-snowy-heavy.svg";
             break;
           }
         case (95):
           {
-            link = "root:/svg/weather/weather-lightning.svg";
+            link = "root:/assets/svg/weather/weather-lightning.svg";
             break;
           }
         case (96):
           {
-            link = "root:/svg/weather/weather-lightning-rainy.svg";
+            link = "root:/assets/svg/weather/weather-lightning-rainy.svg";
             break;
           }
         case (99):
           {
-            link = "root:/svg/weather/weather-hurricane.svg";
+            link = "root:/assets/svg/weather/weather-hurricane.svg";
             break;
           }
         }
         return link;
       }
-      return "root:/svg/weather/weather-sunny.svg";
+      return "root:/assets/svg/weather/weather-sunny.svg";
     }
   }
   Rectangle {

@@ -3,7 +3,7 @@ import QtQuick.VectorImage
 import Quickshell.Widgets
 
 import "root:/"
-import "root:/svg/qml"
+import "root:/assets/svg/qml"
 
 Rectangle {
   id: root
@@ -70,7 +70,7 @@ Rectangle {
         width: 36
         height: 36
         preferredRendererType: VectorImage.CurveRenderer
-        source: "root:/svg/ui/lock-outline.svg"
+        source: "root:/assets/svg/ui/lock-outline.svg"
       }
     }
     ClippingRectangle {
@@ -86,7 +86,7 @@ Rectangle {
         width: 36
         height: 36
         preferredRendererType: VectorImage.CurveRenderer
-        source: "root:/svg/ui/wrench-outline.svg"
+        source: "root:/assets/svg/ui/wrench-outline.svg"
       }
     }
     ClippingRectangle {
@@ -102,7 +102,7 @@ Rectangle {
         width: 36
         height: 36
         preferredRendererType: VectorImage.CurveRenderer
-        source: "root:/svg/media/theater.svg"
+        source: "root:/assets/svg/media/theater.svg"
       }
     }
   }

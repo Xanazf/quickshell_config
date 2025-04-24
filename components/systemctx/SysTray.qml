@@ -56,7 +56,7 @@ Row {
           id: trayIcon
           source: {
             if (toprect.modelData.title === "Steam") {
-              return "root:/svg/apps/steam.svg";
+              return "root:/assets/svg/apps/steam.svg";
             }
             return toprect.modelData.icon;
           }
