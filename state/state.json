@@ -1,34 +1,35 @@
 {
-	"home": "/home/xnzf/",
-	"shell": "/bin/fish",
-	"dm": "hyprland",
-	"terminal": "xterm-kitty",
-	"username": "xnzf",
-	"hostname": "archisis",
-	"distro": "Arch Linux",
-	"lang": "uk_UA.UTF-8",
-	"date": "24.04.2025",
-	"modes": {
-		"dev": true,
-		"powerSaving": true
-	},
-	"ui": {
-		"font": "Rubik",
-		"drawerOpen": false,
-		"animations": true,
-		"fps": 60
-	},
-	"audio": {
-		"speaker": {
-			"muted": false,
-			"volume": 75
-		},
-		"mic": {
-			"muted": false,
-			"volume": 100
-		}
-	},
-	"keyboard": {
-		"layout": "dv"
-	}
+  "home": "/home/xnzf/",
+  "shell": "/bin/fish",
+  "dm": "hyprland",
+  "terminal": "xterm-kitty",
+  "username": "xnzf",
+  "hostname": "archisis",
+  "distro": "Arch Linux",
+  "lang": "uk_UA.UTF-8",
+  "date": "24.04.2025",
+  "modes": {
+    "dev": true,
+    "zen": false,
+    "powerSaving": true
+  },
+  "ui": {
+    "font": "Rubik",
+    "drawerOpen": false,
+    "animations": true,
+    "fps": 60
+  },
+  "audio": {
+    "speaker": {
+      "muted": false,
+      "volume": 75
+    },
+    "mic": {
+      "muted": false,
+      "volume": 100
+    }
+  },
+  "keyboard": {
+    "layout": "dv"
+  }
 }

@@ -13,6 +13,7 @@ Singleton {
 
   // initialize state
   property bool dev: true
+  property string city: "Kyiv"
   property var state: StateMachine
 
   property string username: state.username

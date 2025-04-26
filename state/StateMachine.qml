@@ -147,6 +147,30 @@ Singleton {
       hostcheck.running = false;
     }
   }
+
+  // saved state object
+  property var stateobject
+
+  // save current state to file
+  onStateobjectChanged: {
+    if (stateobject.username && statefile.text() !== JSON.stringify(stateobject)) {
+      statefile.setText(JSON.stringify(stateobject, null, 2));
+      statefile.reload();
+      Logger.log("json");
+    }
+  }
+
+  // state file io
+  FileView {
+    id: statefile
+    path: Qt.resolvedUrl("./state.json")
+    blockLoading: true
+    onLoaded: {
+      root.stateobject = JSON.parse(statefile.text());
+    }
+  }
+
+  // on init
   Component.onCompleted: () => {
     Logger.log("Hello, " + root.username + "!");
   }
