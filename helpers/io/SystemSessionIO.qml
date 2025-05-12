@@ -4,6 +4,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+import "./"
+
 // fastfetch -c /home/xnzf/.config/fastfetch/rawdata.jsonc
 
 Singleton {

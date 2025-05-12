@@ -3,22 +3,25 @@ import Quickshell
 import Quickshell.Widgets
 
 import "root:/"
+import "root:/state"
 import "root:/helpers/io"
 
 ClippingWrapperRectangle {
   id: root
-  color: Qt.alpha(Config.colors.mainColor3, 0.1)
-  radius: Config.sizes.mainRadius
+  color: Qt.alpha(StateMachine.colors.emphasis3, 0.1)
+  radius: StateMachine.sizes.radius
   property ObjectModel appItems: DesktopIO.apps
   property list<QtObject> filteredItems
   resizeChild: true
   margin: 10
+  implicitWidth: parent.implicitWidth
   function filterApps(filterValue, filterArray) {
+    Logger.log("HELLO?????");
     return filterArray.values.filter(item => item.name.toLowerCase().indexOf(filterValue) !== -1);
   }
   Keys.onPressed: event => {
-    if (event.key === Qt.Key_Escape) {
-      Config.menuOpen = false;
+    if (event.key === Qt.Key_Escape && StateMachine.drawerOpen) {
+      StateMachine.drawerOpen = !StateMachine.drawerOpen;
     }
   }
   child: Rectangle {
@@ -26,28 +29,29 @@ ClippingWrapperRectangle {
     //resizeChild: true
     color: "transparent"
     radius: root.radius
-    implicitWidth: root.parent.implicitWidth
+    implicitWidth: root.implicitWidth
     implicitHeight: 130
     WrapperRectangle {
       id: inputWrapper
       anchors.top: parent.top
-      radius: parent.radius
+      radius: root.radius
       width: parent.implicitWidth - 20
       height: 40
-      color: Qt.alpha(Config.colors.neutral, 0.1)
+      color: Qt.alpha(StateMachine.colors.neutral, 0.1)
       margin: 6
-      child: MouseArea {
+      MouseArea {
         cursorShape: Qt.IBeamCursor
         anchors.fill: parent
         TextInput {
           id: searchInput
-          focus: Config.menuOpen
+          focus: StateMachine.drawerOpen
           onDisplayTextChanged: {
             root.filteredItems = root.filterApps(displayText, root.appItems);
           }
           onAccepted: {
             root.filteredItems[0].execute();
-            Config.menuOpen = false;
+            if (StateMachine.drawerOpen === true)
+              StateMachine.drawerOpen = !StateMachine.drawerOpen;
           }
           Keys.onPressed: event => {
             switch (event.key) {
@@ -64,13 +68,13 @@ ClippingWrapperRectangle {
           anchors.verticalCenter: parent.verticalCenter
           anchors.leftMargin: 6
           width: parent.width
-          color: Config.colors.fontcolor
+          color: StateMachine.colors.text
           font.pixelSize: 21
           font.letterSpacing: 1
         }
       }
     }
-    ClippingRectangle {
+    Rectangle {
       anchors.top: inputWrapper.bottom
       anchors.topMargin: 8
       color: "transparent"
@@ -115,7 +119,7 @@ ClippingWrapperRectangle {
             {
               if (focus & interactive) {
                 model[currentIndex].execute();
-                Config.menuOpen = false;
+                StateMachine.drawerOpen = !StateMachine.drawerOpen;
               }
               break;
             }
@@ -201,7 +205,7 @@ ClippingWrapperRectangle {
           required property int index
           implicitHeight: 40
           implicitWidth: root.implicitWidth / 4 - 25
-          radius: Config.sizes.mainRadius
+          radius: StateMachine.sizes.radius
           color: Qt.alpha("white", 0.1)
 
           ClippingRectangle {

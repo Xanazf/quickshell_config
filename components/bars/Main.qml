@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Wayland
 
 import "root:/"
+import "root:/helpers/io/"
+import "root:/state"
 import "root:/components/backgrounds"
 import "root:/components/shared/containers/"
 import "root:/components/shared/decorations/"
@@ -12,7 +14,8 @@ import "root:/components/datetime"
 import "root:/components/hyprland"
 import "root:/components/media"
 import "root:/components/systemctx"
-import "root:/components/menu"
+import "root:/components/menu/"
+import "root:/components/menu/appmenugrid/"
 import "root:/components/updatecheck"
 import "root:/components/clipboard"
 
@@ -26,7 +29,7 @@ Scope {
       id: root
       // props
       //focusable: appMenuPopup.visible
-      WlrLayershell.keyboardFocus: appMenuPopup.visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+      WlrLayershell.keyboardFocus: StateMachine.drawerOpen ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
       // Needed for screens
       property var modelData
@@ -40,41 +43,26 @@ Scope {
       }
 
       // Sizing
-      height: Config.sizes.barHeight
+      height: StateMachine.sizes.bars.main.height
       width: screen.width
       margins {
-        top: 6
-        right: 6
-        left: 6
+        top: StateMachine.sizes.bars.main.margin
+        right: StateMachine.sizes.bars.main.margin
+        left: StateMachine.sizes.bars.main.margin
       }
+
+      property real drawerYOffset: height
 
       // Styling
       color: "transparent"
       BackgroundItem {}
 
       // Popups
-      ClipboardPopup {
-        window: root
-        parentRect: clipboardItem
-        show: clipboardRoot.showPopup
-        items: clipboardRoot.cliphistdata
+      Drawer {
+        id: drawer
+        bar: root
       }
 
-      AppMenuPopup {
-        id: appMenuPopup
-        window: root
-        parentRect: appmenuItem
-        show: appmenuRoot.showPopup
-        onSetShowChanged: {
-          if (appMenuPopup.setShow !== appmenuRoot.showPopup) {
-            appmenuRoot.showPopup = appMenuPopup.setShow;
-          }
-        }
-      }
-      // AnimatedPopup {
-      //   id: animatedPopup
-      //   bar: root
-      // }
       // Left Side
       RowLayout {
         id: leftLayoutRoot
@@ -94,8 +82,16 @@ Scope {
         // -- Menu
         BarItem {
           id: appmenuItem
-          AppMenu {
+          AppMenuButton {
             id: appmenuRoot
+            onHoveringChanged: {
+              Logger.log(hovering ? "yes" : "no");
+              if (hovering) {
+                drawer.widgetOwner = appmenuRoot;
+                appmenuRoot.target.owner = appmenuRoot;
+                drawer.setItem(appmenuRoot.target);
+              }
+            }
           }
         }
         BarItem {

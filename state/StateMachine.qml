@@ -21,7 +21,7 @@ Singleton {
   property string terminal: Config.terminal || Quickshell.env("TERM") || "gnome-terminal"
   property string username: Config.username || Quickshell.env("USER") || "broski"
   property string hostname: Config.hostname
-  property string distro
+  property string distro: ""
   property string lang: Quickshell.env("LANG") ?? "en_GB.UTF-8"
   // --
 
@@ -56,13 +56,42 @@ Singleton {
     property color emphasis2: Config.colors.main2 ?? "#5F0AC7"
     property color visualizer: Config.colors.visualizerEffects ?? "#02F734" // "##04E02F"
     property color text: Config.colors.fontcolor ?? "#E2ECFE"
+    property color neutral: Config.colors.neutral ?? "#010C1D"
+
+    // ui colors
+    // -- danger
+    property color red900: "#DD0039"
+    property color red800: "#FF0042"
+    property color red700: "#FF225B"
+    property color red600: "#FF4575"
+    property color red500: "#FF668D"
+
+    // -- warning
+    property color yellow900: "#FFA500"
+    property color yellow800: "#EBC600"
+    property color yellow700: "#FFD700"
+    property color yellow600: "#FFEB3B"
+    property color yellow500: "#FFEC88"
+
+    // -- info
+    property color navy900: "#0C00DD"
+    property color navy800: "#2E22FF"
+    property color navy700: "#4E44FF"
+    property color navy600: "#6E66FF"
+    property color navy500: "#8E88FF"
+
+    // --success
+    property color green900: "#007742"
+    property color green800: "#00BB67"
+    property color green700: "#00FF8D"
+    property color green600: "#44FFAB"
 
     // generated
     // default:
     // emphasis3: #0937c0
     // tint: #7c0e74
     property color emphasis3: {
-      let result = ColorManipulator.findTriadicColor(emphasis1, emphasis2);
+      let result = ColorManipulator.findTriadicColor(colors_root.emphasis1, colors_root.emphasis2);
       return ColorManipulator.rgbToColor(result);
     }
     property color tint: Qt.tint(emphasis1, Qt.alpha(emphasis2, 0.5))
@@ -86,7 +115,7 @@ Singleton {
       id: colors_container
 
       // 60
-      property color background: Qt.darker(colors_root.emphasis3, 2.1)
+      property color background: Qt.alpha(Qt.darker(colors_root.emphasis3, 2.1), 0.3)
       // 30
       property color content: colors_root.emphasis2
       property color border: Qt.lighter(colors_root.emphasis1, 2.1)
@@ -129,10 +158,32 @@ Singleton {
   // TODO:
   // property QtObject pinned: QtObject {}
 
+  // distro getter
+  Process {
+    id: distrocheck
+    running: true
+    command: ["sh", "-c", "lsb_release -d"]
+    stdout: SplitParser {
+      onRead: data => {
+        let distro = data.split(":")[1].trim();
+        Logger.log(distro);
+        if (distro === "Arch Linux") {
+          root.distro = distro + " (btw)";
+        } else {
+          root.distro = distro;
+        }
+      }
+    }
+    onExited: status => {
+      Logger.i_w(status, "DISTRO CHECK SUCCESS", "HOST CHECK FAILED");
+      distrocheck.running = false;
+    }
+  }
   // Pipewire binding
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
   }
+  // hostname getter
   Process {
     id: hostcheck
     running: true

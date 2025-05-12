@@ -3,10 +3,8 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
-import Quickshell.Services.Pipewire
 
-import "./state/"
-import "./helpers/io/"
+// import "./helpers/io/"
 
 Singleton {
   id: root
@@ -14,13 +12,11 @@ Singleton {
   // initialize state
   property bool dev: true
   property string city: "Kyiv"
-  property var state: StateMachine
 
-  property string username: state.username
-  property string distro: state.distro ?? "Arch Linux (btw)"
+  property string username: "xnzf"
+  property string distro: "Arch Linux (btw)"
 
   property bool powerSaving: true
-  property bool menuOpen: state.menuOpen
 
   ColorQuantizer {
     id: colorGenerator
@@ -37,7 +33,7 @@ Singleton {
       return colorGenerator.colors;
     }
     // main colors
-    property string main1: "#DB0037"
+    property string main1: "#C80E65"
     property string main2: "#1911A6"
     property string mainColor0: "#111160"
     property string mainColor1: "#0F0679"

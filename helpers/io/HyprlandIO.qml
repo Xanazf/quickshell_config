@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 
-import "root:/"
+import "root:/state/"
 
 Singleton {
   property string currKeyboardLayout: "US"
@@ -96,13 +96,7 @@ Singleton {
   GlobalShortcut {
     name: "menu"
     onPressed: {
-      Config.menuOpen = !Config.menuOpen;
-      if (Config.menuOpen) {
-        Hyprland.dispatch("movecursor 150 100");
-      }
-      if (!Config.menuOpen) {
-        Hyprland.dispatch("movecursor 990 600");
-      }
+      StateMachine.drawerOpen = !StateMachine.drawerOpen;
     }
   }
 }

@@ -4,7 +4,7 @@ import QtMultimedia
 import Quickshell
 import Quickshell.Wayland
 
-import "root:/"
+import "root:/state/"
 
 // Screen Factory
 Scope {
@@ -31,22 +31,22 @@ Scope {
 
       Video {
         id: videoBg
-        visible: !Config.powerSaving
+        visible: !StateMachine.powerSaving
         anchors.fill: parent
         autoPlay: true
         loops: MediaPlayer.Infinite
         fillMode: VideoOutput.Stretch
-        source: Config.powerSaving ? "" : "root:/assets/wallpapers/pinksunwave.mp4"
+        source: StateMachine.powerSaving ? "" : "root:/assets/wallpapers/pinksunwave.mp4"
       }
 
       Image {
         id: imgBg
-        visible: Config.powerSaving
+        visible: StateMachine.powerSaving
         fillMode: Image.PreserveAspectFit
         mipmap: true
         autoTransform: false
-        width: 1920
-        height: 1080
+        width: 2560
+        height: 1440
         source: "root:/assets/wallpapers/forest.jpg"
       }
     }

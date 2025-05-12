@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell.Widgets
 
 import "root:/"
+import "root:/state/"
 import "root:/helpers/io/"
 import "root:/assets/svg/qml/"
 import "../../shared/decorations/"
@@ -19,7 +20,7 @@ Rectangle {
   property real totalRAM: SystemSessionIO.totalRAM
   property real usedRAM: SystemSessionIO.usedRAM.toFixed(1)
 
-  property real totalSwap: SystemSessionIO.totalSwap
+  property real totalSwap: SystemSessionIO.totalSwap ?? 83.1
   property real usedSwap: SystemSessionIO.usedSwap.toFixed(1)
 
   // -- CPU
@@ -40,12 +41,12 @@ Rectangle {
   property real sdcTotal: SystemSessionIO.sdcTotal
 
   // styling
-  color: Qt.alpha(Config.colors.mainColor5, 0.1)
-  radius: Config.sizes.mainRadius
+  color: Qt.alpha(StateMachine.colors.emphasis1, 0.1)
+  radius: StateMachine.sizes.radius
 
   BorderSubtle {
-    gradientColor1: Config.colors.mainColor6
-    gradientColor2: Config.colors.yellow600
+    gradientColor1: StateMachine.colors.emphasis1
+    gradientColor2: StateMachine.colors.green600
     numOfBorders: 1
   }
 
@@ -62,33 +63,35 @@ Rectangle {
       font.bold: true
       font.pixelSize: 21
       font.letterSpacing: 1.2
-      color: Config.colors.mainColor4
-      text: `${Config.username}@${root.host}`
+      color: StateMachine.colors.emphasis3
+      text: `${StateMachine.username}@${root.host}`
     }
     Text {
       id: uptime
       antialiasing: true
       font.pixelSize: 18
       font.letterSpacing: 1
-      color: Config.colors.yellow600
+      color: StateMachine.colors.yellow600
       leftPadding: 5
       text: root.uptime.slice(0, root.uptime.lastIndexOf(","))
     }
     Text {
       id: distroText
+      width: text.length
       antialiasing: true
       font.pixelSize: 18
       font.letterSpacing: 1
-      color: "darkturquoise"
-      text: Config.distro
+      color: StateMachine.colors.emphasis2
+      text: StateMachine.distro
       Text {
         id: kernelText
+        width: text.length
         anchors.top: distroText.bottom
         anchors.right: distroText.right
         antialiasing: true
         font.pixelSize: 16
         font.letterSpacing: 1
-        color: Qt.alpha(Config.colors.fontcolor, 0.3)
+        color: Qt.alpha(StateMachine.colors.text, 0.3)
         text: root.kernel
       }
     }
@@ -176,7 +179,7 @@ Rectangle {
                   id: gpuUtilFilled
                   anchors.verticalCenter: parent.verticalCenter
                   height: parent.height
-                  width: parent.width * (parent.utilNum * 0.01)
+                  width: parent.width * (parent.utilNum * 0.01) ?? 22
                   x: 0
                   color: parent.currColor
                 }
@@ -185,7 +188,10 @@ Rectangle {
                   font.pixelSize: 12
                   color: gpuUtilCanvas.currColor
                   anchors.verticalCenter: parent.verticalCenter
-                  x: gpuUtilFilled.width >= (parent.width / 2) ? gpuUtilFilled.width + 3 : parent.width / 2
+                  x: {
+                    let result = gpuUtilFilled.width >= (parent.width / 2) ? gpuUtilFilled.width + 3 : parent.width / 2;
+                    return result;
+                  }
                   text: `${gpuUtilCanvas.utilNum}%`
                 }
               }
