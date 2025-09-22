@@ -9,8 +9,8 @@ Item {
   implicitHeight: 24
   transform: [
     Scale {
-      xScale: width / 24
-      yScale: height / 24
+      xScale: root.width / 24
+      yScale: root.height / 24
     }
   ]
   Shape {

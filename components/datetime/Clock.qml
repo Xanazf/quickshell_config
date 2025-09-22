@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
-import "root:/"
+
+import qs.config
 
 Rectangle {
   id: root

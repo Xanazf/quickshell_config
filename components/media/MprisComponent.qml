@@ -5,9 +5,9 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Services.Mpris
 
-import "root:/"
-import "root:/helpers/io"
-import "../shared/templates/"
+import qs.config
+import qs.helpers.io
+import qs.components.shared.templates
 
 Rectangle {
   id: root

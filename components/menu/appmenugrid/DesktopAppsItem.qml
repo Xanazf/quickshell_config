@@ -2,9 +2,9 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 
-import "root:/"
-import "root:/state"
-import "root:/helpers/io"
+import qs.config
+import qs.state
+import qs.helpers.io
 
 ClippingWrapperRectangle {
   id: root

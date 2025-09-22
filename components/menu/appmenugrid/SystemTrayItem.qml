@@ -1,8 +1,8 @@
 import QtQuick
 import Quickshell.Widgets
 
-import "root:/state"
-import "root:/components/systemctx/"
+import qs.state
+import qs.components.systemctx
 
 WrapperRectangle {
   id: root

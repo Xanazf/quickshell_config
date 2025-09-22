@@ -12,7 +12,6 @@ import "root:/state"
 
 Scope {
   id: root
-  property var state: StateMachine
   required property QsWindow bar
 
   property Widget activeWidget: null // inside the drawer, pinnable
@@ -31,7 +30,7 @@ Scope {
     if (activeItem !== null) {
       hangTimer.stop();
       activeItem.targetVisible = true;
-      root.state.drawerOpen = true;
+      StateMachine.drawerOpen = true;
 
       if (activeTooltip !== null || activeMenu !== null) {
         activeItem.parent = widget;
@@ -52,7 +51,7 @@ Scope {
   }
 
   function setItem(item: Widget) {
-    root.state.drawerOpen = true;
+    StateMachine.drawerOpen = true;
     if (item.isMenu) {
       activeMenu = item;
     } else {
@@ -61,7 +60,7 @@ Scope {
   }
 
   function removeItem(item: var) {
-    root.state.drawerOpen = false;
+    StateMachine.drawerOpen = false;
     if (item.isMenu && activeMenu == item) {
       activeMenu = null;
     } else if (!item.isMenu && activeWidget == item) {
@@ -71,13 +70,13 @@ Scope {
 
   function doLastHide() {
     lastActiveItem.targetVisible = false;
-    root.state.drawerOpen = false;
+    StateMachine.drawerOpen = false;
   }
 
   function onHidden(item: var) {
     if (item == lastActiveItem) {
       lastActiveItem = null;
-      root.state.drawerOpen = false;
+      StateMachine.drawerOpen = false;
     }
   }
 
@@ -102,8 +101,8 @@ Scope {
       id: popup
       anchor {
         window: bar
-        rect.y: bar.drawerYOffset
-        rect.x: root.state.sizes.bars.main.margin //widget.highestAnimX
+        rect.y: bar.drawerOffset
+        rect.x: StateMachine.sizes.bars.main.margin //widget.highestAnimX
         adjustment: PopupAdjustment.None
       }
 
@@ -136,7 +135,7 @@ Scope {
         }
       }
 
-      widget {
+      Widget {
         id: widget
         bar: root.bar
         popupLayer: popup

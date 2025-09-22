@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 
-import "root:/"
+import qs.config
 
 GridLayout {
   id: root

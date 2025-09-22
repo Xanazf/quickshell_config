@@ -60,7 +60,7 @@ Item {
   property var x1: -1
   property var x2: -1
 
-  x: x1 - popup.anchor.rect.x
+  x: x1 - popupLayer.anchor.rect.x
   width: x2 - x1
 
   readonly property bool anyAnimsRunning: x1Anim.running || x2Anim.running || heightAnim.running

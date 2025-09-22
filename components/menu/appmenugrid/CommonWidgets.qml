@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.VectorImage
 import Quickshell.Widgets
 
-import "root:/"
-import "root:/assets/svg/qml"
+import qs.config
+import qs.assets.svg.qml
 
 Rectangle {
   id: root

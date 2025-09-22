@@ -1,11 +1,12 @@
 import QtQuick
+import Quickshell
 import Quickshell.Widgets
 
 import "./appmenugrid/"
-import "root:/state"
-import "root:/helpers/io"
-import "root:/components/shared/containers/"
-import "root:/assets/svg/qml"
+import qs.state
+import qs.helpers.io
+import qs.components.shared.containers
+import qs.assets.svg.qml
 
 ClippingRectangle {
   id: root
@@ -13,9 +14,16 @@ ClippingRectangle {
   implicitHeight: 30
   anchors.centerIn: parent
   color: "transparent"
-  property bool hovering: false
-  property Widget target: AppMenuWrapper {}
+  required property QsWindow qsWindow
   property bool targetVisible: false
+  property bool hovering: false
+  property Widget target: AppMenuWrapper {
+    owner: root
+    bar: root.window
+    scaleMul: 1
+    targetVisible: root.targetVisible
+    popupLayer: root.parent.drawer
+  }
 
   MouseArea {
     id: mouseArea1

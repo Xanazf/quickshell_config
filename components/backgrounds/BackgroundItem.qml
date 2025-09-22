@@ -1,7 +1,8 @@
 import QtQuick
 import Qt5Compat.GraphicalEffects
+import Quickshell
 
-import "root:/"
+import qs.config
 
 Item {
   id: root

@@ -4,9 +4,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 
-import "root:/"
-import "root:/helpers/io"
-import "../shared/templates/"
+import qs.config
+import qs.helpers.io
+import qs.components.shared.templates
 
 Item {
   id: root

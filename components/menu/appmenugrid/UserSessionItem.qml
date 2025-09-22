@@ -1,10 +1,10 @@
 import QtQuick
 import Quickshell.Widgets
 
-import "root:/"
-import "root:/state/"
-import "root:/helpers/io/"
-import "root:/assets/svg/qml/"
+import qs.config
+import qs.state
+import qs.helpers.io
+import qs.assets.svg.qml
 import "../../shared/decorations/"
 import "../../shared/templates/"
 

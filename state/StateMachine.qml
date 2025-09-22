@@ -6,9 +6,9 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
 
-import "../"
-import "../helpers/io/"
-import "../helpers/theme/"
+import qs.config
+import qs.helpers.io
+import qs.helpers.theme
 
 Singleton {
   id: root
@@ -23,6 +23,7 @@ Singleton {
   property string hostname: Config.hostname
   property string distro: ""
   property string lang: Quickshell.env("LANG") ?? "en_GB.UTF-8"
+  property bool zen: false
   // --
 
   // GLOBAL SETTINGS
@@ -32,6 +33,7 @@ Singleton {
   property font font: Config.font ?? Qt.font({
     family: "Rubik"
   })
+  property real mainBarOrientation: 2
 
   // TODO:
   //  property string theme: "dark"
@@ -42,6 +44,13 @@ Singleton {
   property int frameRate: 60
 
   // --
+
+  // modes
+  property QtObject modes: QtObject {
+    id: modes_root
+    property bool powerSaving: Config.powerSaving ?? true
+    property bool zen: Config.zen ?? false
+  }
 
   // COLORS
   // 60/30/10

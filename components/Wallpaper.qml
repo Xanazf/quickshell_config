@@ -1,10 +1,10 @@
+pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Effects
 import QtMultimedia
 import Quickshell
 import Quickshell.Wayland
 
-import "root:/state/"
+import qs.state
 
 // Screen Factory
 Scope {
@@ -12,26 +12,27 @@ Scope {
     model: Quickshell.screens
     PanelWindow {
       id: root
-      property var modelData
+      required property var modelData
       screen: modelData
-      width: screen.width
-      height: screen.height
+      implicitWidth: screen.width
+      implicitHeight: screen.height
+      property bool isPortrait: screen.orientation === Qt.PortraitOrientation
 
       // When PanelWindow is backed with WlrLayershell this will work
       WlrLayershell.layer: WlrLayer.Background
+      exclusionMode: ExclusionMode.Ignore
       anchors {
         top: true
         left: true
         right: true
         bottom: true
       }
-      exclusionMode: ExclusionMode.Ignore
 
       color: "black"
 
       Video {
         id: videoBg
-        visible: !StateMachine.powerSaving
+        visible: !StateMachine.powerSaving && !root.isPortrait
         anchors.fill: parent
         autoPlay: true
         loops: MediaPlayer.Infinite
@@ -41,12 +42,17 @@ Scope {
 
       Image {
         id: imgBg
-        visible: StateMachine.powerSaving
-        fillMode: Image.PreserveAspectFit
+        visible: StateMachine.powerSaving || root.isPortrait
+        fillMode: {
+          if (root.isPortrait) {
+            return Image.PreserveAspectCrop;
+          }
+          return Image.PreserveAspectFit;
+        }
         mipmap: true
         autoTransform: false
-        width: 2560
-        height: 1440
+        width: root.width
+        height: root.height
         source: "root:/assets/wallpapers/forest.jpg"
       }
     }

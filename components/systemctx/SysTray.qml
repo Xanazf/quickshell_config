@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 
-import "root:/"
+import qs.config
 
 Row {
   id: root

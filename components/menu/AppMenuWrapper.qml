@@ -2,8 +2,8 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 
-import "root:/state"
-import "root:/helpers/io"
+import qs.state
+import qs.helpers.io
 import "../shared/containers/"
 import "../shared/decorations/"
 import "./appmenugrid"

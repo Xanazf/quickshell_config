@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.VectorImage
 
-import "root:/"
-import "root:/helpers/io/"
+import qs.config
+import qs.helpers.io
 
 Rectangle {
   id: root

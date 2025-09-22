@@ -14,6 +14,7 @@ Singleton {
   property string city: "Kyiv"
 
   property string username: "xnzf"
+  property string hostname: "archdawg"
   property string distro: "Arch Linux (btw)"
 
   property bool powerSaving: true
